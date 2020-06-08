@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+    name="HostService"
+
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+
+    targetNamespace="http://truetechsystems.com.br/lacuisine/hmi/v1/"
+    xmlns:tns="http://truetechsystems.com.br/lacuisine/hmi/v1/"
+
+    xmlns:cmn="http://truetechsystems.com.br/lacuisine/common/v1/"
+
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+
+    <types>
+        <xs:schema
+            xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://truetechsystems.com.br/lacuisine/hmi/v1/"
+            xmlns:tns="http://truetechsystems.com.br/lacuisine/hmi/v1/"
+            elementFormDefault="unqualified">
+            
+            <xs:import namespace="http://truetechsystems.com.br/lacuisine/common/v1/" schemaLocation="common.xsd"/>
+            
+
+        </xs:schema>
+    </types>
+
+    <!-- messages -->
+
+    <!-- portType -->
+    
+    <!-- binding -->
+    
+    <!-- service -->
+    <service name="service">
+        <port name="serviceInterface" binding="tns:LacuisineBinding">
+            <soap12:address location="http://localhost:9090/zzz"/>
+        </port>
+    </service>
+    
+</definitions>

@@ -1,0 +1,13 @@
+wsdl2h lacuisine.wsdl common.xsd
+mkdir service
+soapcpp2 -S -w -x -i -d./service/ lacuisine.h
+rm lacuisine.h
+wsdl2h lacuisine.wsdl service.wsdl
+mkdir client
+soapcpp2 -C -L -w -x -i -d./client/ lacuisine.h
+rm lacuisine.h
+mkdir -p server/service
+mkdir server/client
+cp ./service/* ./server/service
+cp ./client/* ./server/client
+rm -R ./service ./client
