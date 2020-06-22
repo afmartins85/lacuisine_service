@@ -1,0 +1,3 @@
+[submodule "gsoap/generate"]
+	path = gsoap/generate
+	url = git@github.com:afmartins85/lacuisine_gsoap_common.git
