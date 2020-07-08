@@ -33,7 +33,7 @@ DatabaseConnection::DatabaseConnection(const QString &driver, const QString &dbN
   this->setHost(host);
   this->setPort(port);
 
-  QSqlError err = this->connect();
+  QSqlError err = this->connectDatabase();
 
   if (!err.isValid()) {
     LOG_F(ERROR, "%s", err.text().toLatin1().data());
@@ -131,10 +131,16 @@ int DatabaseConnection::port() const { return m_port; }
 void DatabaseConnection::setPort(int port) { m_port = port; }
 
 /**
- * @brief DatabaseConnection::connect
+ * @brief DatabaseConnection::getDbInstance
  * @return
  */
-QSqlError DatabaseConnection::connect(void) {
+const QSqlDatabase &DatabaseConnection::getDbInstance() { return this->m_db; }
+
+/**
+ * @brief DatabaseConnection::connectDatabase
+ * @return
+ */
+QSqlError DatabaseConnection::connectDatabase(void) {
   QSqlError err;
   this->m_db = QSqlDatabase::addDatabase(this->driver());
   this->m_db.setDatabaseName(this->dbName());

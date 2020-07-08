@@ -1,19 +1,23 @@
 #ifndef SOAPSERVICE_H
 #define SOAPSERVICE_H
 
+#include <QMap>
 #include <QObject>
+#include <QSet>
+#include <QString>
 
-class SoapService : public QObject
-{
-public:
-    explicit SoapService(QObject *parent = nullptr);
-    virtual ~SoapService();
+class SoapService : public QObject {
+ public:
+  explicit SoapService(QObject *parent = nullptr);
+  virtual ~SoapService();
 
-    //! Web service Start
-    void start (int port);
+  //! Web service Start
+  void start(int port);
 
-signals:
+ signals:
 
+ private:
+  QSet<QString> m_SessionOpened;
 };
 
-#endif // SOAPSERVICE_H
+#endif  // SOAPSERVICE_H

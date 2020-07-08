@@ -44,10 +44,12 @@ class DatabaseConnection : public QObject {
   int port() const;
   //! Set port number
   void setPort(int port);
+  //! Return the database instance
+  const QSqlDatabase &getDbInstance(void);
 
  public slots:
   //! Assert connection on database
-  QSqlError connect(void);
+  QSqlError connectDatabase(void);
 
  signals:
 

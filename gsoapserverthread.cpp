@@ -20,10 +20,14 @@ void GSoapServerThread::run() {
   // the soap_serve() call.
   //    database_handle_type database_handle;
   //    soap_init(&soap);    soap.user = (void*)database_handle;
-  Operation database_handle;
-  m_servicePtr->soap->user = &database_handle;
 
-  m_servicePtr->serve();
+  if (m_servicePtr->ssl_accept()) {
+    LOG_F(WARNING, "Connection refused! SSL request failed, requires a valid certificate!");
+    m_servicePtr->soap_print_fault(stderr);
+  } else {
+    m_servicePtr->serve();
+  }
+
   m_servicePtr->destroy();
   delete m_servicePtr;
 }
