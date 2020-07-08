@@ -18,7 +18,7 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
 
 #include "soapH.h"
 
-SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.103 2020-06-22 16:36:12 GMT")
+SOAP_SOURCE_STAMP("@(#) soapC.cpp ver 2.8.103 2020-06-30 12:12:26 GMT")
 
 
 #ifndef WITH_NOGLOBAL
@@ -191,42 +191,26 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, const char *tag,
 		return soap_in_byte(soap, tag, NULL, "xsd:byte");
 	case SOAP_TYPE_int:
 		return soap_in_int(soap, tag, NULL, "xsd:int");
-	case SOAP_TYPE_unsignedByte:
-		return soap_in_unsignedByte(soap, tag, NULL, "xsd:unsignedByte");
-	case SOAP_TYPE_unsignedInt:
-		return soap_in_unsignedInt(soap, tag, NULL, "xsd:unsignedInt");
 	case SOAP_TYPE_bool:
 		return soap_in_bool(soap, tag, NULL, "xsd:boolean");
 	case SOAP_TYPE_ns2__SessionEnum:
 		return soap_in_ns2__SessionEnum(soap, tag, NULL, "ns2:SessionEnum");
 	case SOAP_TYPE_ns2__ProfileEnum:
 		return soap_in_ns2__ProfileEnum(soap, tag, NULL, "ns2:ProfileEnum");
-	case SOAP_TYPE_ns2__UserDataSession:
-		return soap_in_ns2__UserDataSession(soap, tag, NULL, "ns2:UserDataSession");
-	case SOAP_TYPE_ns2__AuthenticationType:
-		return soap_in_ns2__AuthenticationType(soap, tag, NULL, "ns2:AuthenticationType");
-	case SOAP_TYPE_ns1__OpenUserSessionResponse:
-		return soap_in_ns1__OpenUserSessionResponse(soap, tag, NULL, "ns1:OpenUserSessionResponse");
-	case SOAP_TYPE_ns1__OpenUserSessionRequest:
-		return soap_in_ns1__OpenUserSessionRequest(soap, tag, NULL, "ns1:OpenUserSessionRequest");
-	case SOAP_TYPE_ns1__AccessAuthenticationResponseType:
-		return soap_in_ns1__AccessAuthenticationResponseType(soap, tag, NULL, "ns1:AccessAuthenticationResponseType");
-	case SOAP_TYPE_ns1__AccessAuthenticationRequestType:
-		return soap_in_ns1__AccessAuthenticationRequestType(soap, tag, NULL, "ns1:AccessAuthenticationRequestType");
-	case SOAP_TYPE_xsd__UserDataSession:
-		return soap_in_xsd__UserDataSession(soap, tag, NULL, "xsd:UserDataSession");
 	case SOAP_TYPE_std__string:
 		return soap_in_std__string(soap, tag, NULL, "xsd:string");
-	case SOAP_TYPE_xsd__base64Binary:
-		return soap_in_xsd__base64Binary(soap, tag, NULL, "xsd:base64Binary");
-	case SOAP_TYPE_PointerTons1__OpenUserSessionRequest:
-		return soap_in_PointerTons1__OpenUserSessionRequest(soap, tag, NULL, "ns1:OpenUserSessionRequest");
-	case SOAP_TYPE_PointerTons1__AccessAuthenticationRequestType:
-		return soap_in_PointerTons1__AccessAuthenticationRequestType(soap, tag, NULL, "ns1:AccessAuthenticationRequestType");
-	case SOAP_TYPE_PointerTons2__AuthenticationType:
-		return soap_in_PointerTons2__AuthenticationType(soap, tag, NULL, "ns2:AuthenticationType");
-	case SOAP_TYPE_PointerTounsignedByte:
-		return soap_in_PointerTounsignedByte(soap, tag, NULL, "xsd:unsignedByte");
+	case SOAP_TYPE_ns2__UserDataSession:
+		return soap_in_ns2__UserDataSession(soap, tag, NULL, "ns2:UserDataSession");
+	case SOAP_TYPE_ns1__CloseUserSessionResponseType:
+		return soap_in_ns1__CloseUserSessionResponseType(soap, tag, NULL, "ns1:CloseUserSessionResponseType");
+	case SOAP_TYPE_ns1__OpenUserSessionResponseType:
+		return soap_in_ns1__OpenUserSessionResponseType(soap, tag, NULL, "ns1:OpenUserSessionResponseType");
+	case SOAP_TYPE_ns1__DataUserSessionType:
+		return soap_in_ns1__DataUserSessionType(soap, tag, NULL, "ns1:DataUserSessionType");
+	case SOAP_TYPE_PointerTons1__DataUserSessionType:
+		return soap_in_PointerTons1__DataUserSessionType(soap, tag, NULL, "ns1:DataUserSessionType");
+	case SOAP_TYPE_PointerTons2__UserDataSession:
+		return soap_in_PointerTons2__UserDataSession(soap, tag, NULL, "ns2:UserDataSession");
 	case SOAP_TYPE__QName:
 	{	char **s;
 		s = soap_in__QName(soap, tag, NULL, "xsd:QName");
@@ -244,41 +228,25 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, const char *tag,
 	{	const char *t = soap->type;
 		if (!*t)
 			t = soap->tag;
-		if (!soap_match_tag(soap, t, "ns2:UserDataSession"))
-		{	*type = SOAP_TYPE_ns2__UserDataSession;
-			return soap_in_ns2__UserDataSession(soap, tag, NULL, NULL);
-		}
-		if (!soap_match_tag(soap, t, "ns2:AuthenticationType"))
-		{	*type = SOAP_TYPE_ns2__AuthenticationType;
-			return soap_in_ns2__AuthenticationType(soap, tag, NULL, NULL);
-		}
-		if (!soap_match_tag(soap, t, "ns1:OpenUserSessionResponse"))
-		{	*type = SOAP_TYPE_ns1__OpenUserSessionResponse;
-			return soap_in_ns1__OpenUserSessionResponse(soap, tag, NULL, NULL);
-		}
-		if (!soap_match_tag(soap, t, "ns1:OpenUserSessionRequest"))
-		{	*type = SOAP_TYPE_ns1__OpenUserSessionRequest;
-			return soap_in_ns1__OpenUserSessionRequest(soap, tag, NULL, NULL);
-		}
-		if (!soap_match_tag(soap, t, "ns1:AccessAuthenticationResponseType"))
-		{	*type = SOAP_TYPE_ns1__AccessAuthenticationResponseType;
-			return soap_in_ns1__AccessAuthenticationResponseType(soap, tag, NULL, NULL);
-		}
-		if (!soap_match_tag(soap, t, "ns1:AccessAuthenticationRequestType"))
-		{	*type = SOAP_TYPE_ns1__AccessAuthenticationRequestType;
-			return soap_in_ns1__AccessAuthenticationRequestType(soap, tag, NULL, NULL);
-		}
-		if (!soap_match_tag(soap, t, "xsd:UserDataSession"))
-		{	*type = SOAP_TYPE_xsd__UserDataSession;
-			return soap_in_xsd__UserDataSession(soap, tag, NULL, NULL);
-		}
 		if (!soap_match_tag(soap, t, "xsd:string"))
 		{	*type = SOAP_TYPE_std__string;
 			return soap_in_std__string(soap, tag, NULL, NULL);
 		}
-		if (!soap_match_tag(soap, t, "xsd:base64Binary"))
-		{	*type = SOAP_TYPE_xsd__base64Binary;
-			return soap_in_xsd__base64Binary(soap, tag, NULL, NULL);
+		if (!soap_match_tag(soap, t, "ns2:UserDataSession"))
+		{	*type = SOAP_TYPE_ns2__UserDataSession;
+			return soap_in_ns2__UserDataSession(soap, tag, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "ns1:CloseUserSessionResponseType"))
+		{	*type = SOAP_TYPE_ns1__CloseUserSessionResponseType;
+			return soap_in_ns1__CloseUserSessionResponseType(soap, tag, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "ns1:OpenUserSessionResponseType"))
+		{	*type = SOAP_TYPE_ns1__OpenUserSessionResponseType;
+			return soap_in_ns1__OpenUserSessionResponseType(soap, tag, NULL, NULL);
+		}
+		if (!soap_match_tag(soap, t, "ns1:DataUserSessionType"))
+		{	*type = SOAP_TYPE_ns1__DataUserSessionType;
+			return soap_in_ns1__DataUserSessionType(soap, tag, NULL, NULL);
 		}
 		if (!soap_match_tag(soap, t, "xsd:byte"))
 		{	*type = SOAP_TYPE_byte;
@@ -287,14 +255,6 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_getelement(struct soap *soap, const char *tag,
 		if (!soap_match_tag(soap, t, "xsd:int"))
 		{	*type = SOAP_TYPE_int;
 			return soap_in_int(soap, tag, NULL, NULL);
-		}
-		if (!soap_match_tag(soap, t, "xsd:unsignedByte"))
-		{	*type = SOAP_TYPE_unsignedByte;
-			return soap_in_unsignedByte(soap, tag, NULL, NULL);
-		}
-		if (!soap_match_tag(soap, t, "xsd:unsignedInt"))
-		{	*type = SOAP_TYPE_unsignedInt;
-			return soap_in_unsignedInt(soap, tag, NULL, NULL);
 		}
 		if (!soap_match_tag(soap, t, "xsd:boolean"))
 		{	*type = SOAP_TYPE_bool;
@@ -384,42 +344,26 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_putelement(struct soap *soap, const void *ptr, co
 		return soap_out_byte(soap, tag, id, (const char *)ptr, "xsd:byte");
 	case SOAP_TYPE_int:
 		return soap_out_int(soap, tag, id, (const int *)ptr, "xsd:int");
-	case SOAP_TYPE_unsignedByte:
-		return soap_out_unsignedByte(soap, tag, id, (const unsigned char *)ptr, "xsd:unsignedByte");
-	case SOAP_TYPE_unsignedInt:
-		return soap_out_unsignedInt(soap, tag, id, (const unsigned int *)ptr, "xsd:unsignedInt");
 	case SOAP_TYPE_bool:
 		return soap_out_bool(soap, tag, id, (const bool *)ptr, "xsd:boolean");
 	case SOAP_TYPE_ns2__SessionEnum:
 		return soap_out_ns2__SessionEnum(soap, tag, id, (const enum ns2__SessionEnum *)ptr, "ns2:SessionEnum");
 	case SOAP_TYPE_ns2__ProfileEnum:
 		return soap_out_ns2__ProfileEnum(soap, tag, id, (const enum ns2__ProfileEnum *)ptr, "ns2:ProfileEnum");
-	case SOAP_TYPE_ns2__UserDataSession:
-		return ((ns2__UserDataSession *)ptr)->soap_out(soap, tag, id, "ns2:UserDataSession");
-	case SOAP_TYPE_ns2__AuthenticationType:
-		return ((ns2__AuthenticationType *)ptr)->soap_out(soap, tag, id, "ns2:AuthenticationType");
-	case SOAP_TYPE_ns1__OpenUserSessionResponse:
-		return ((ns1__OpenUserSessionResponse *)ptr)->soap_out(soap, tag, id, "ns1:OpenUserSessionResponse");
-	case SOAP_TYPE_ns1__OpenUserSessionRequest:
-		return ((ns1__OpenUserSessionRequest *)ptr)->soap_out(soap, tag, id, "ns1:OpenUserSessionRequest");
-	case SOAP_TYPE_ns1__AccessAuthenticationResponseType:
-		return ((ns1__AccessAuthenticationResponseType *)ptr)->soap_out(soap, tag, id, "ns1:AccessAuthenticationResponseType");
-	case SOAP_TYPE_ns1__AccessAuthenticationRequestType:
-		return ((ns1__AccessAuthenticationRequestType *)ptr)->soap_out(soap, tag, id, "ns1:AccessAuthenticationRequestType");
-	case SOAP_TYPE_xsd__UserDataSession:
-		return soap_out_xsd__UserDataSession(soap, tag, id, (const std::string *)ptr, "xsd:UserDataSession");
 	case SOAP_TYPE_std__string:
 		return soap_out_std__string(soap, tag, id, (const std::string *)ptr, "xsd:string");
-	case SOAP_TYPE_xsd__base64Binary:
-		return ((xsd__base64Binary *)ptr)->soap_out(soap, tag, id, "xsd:base64Binary");
-	case SOAP_TYPE_PointerTons1__OpenUserSessionRequest:
-		return soap_out_PointerTons1__OpenUserSessionRequest(soap, tag, id, (ns1__OpenUserSessionRequest *const*)ptr, "ns1:OpenUserSessionRequest");
-	case SOAP_TYPE_PointerTons1__AccessAuthenticationRequestType:
-		return soap_out_PointerTons1__AccessAuthenticationRequestType(soap, tag, id, (ns1__AccessAuthenticationRequestType *const*)ptr, "ns1:AccessAuthenticationRequestType");
-	case SOAP_TYPE_PointerTons2__AuthenticationType:
-		return soap_out_PointerTons2__AuthenticationType(soap, tag, id, (ns2__AuthenticationType *const*)ptr, "ns2:AuthenticationType");
-	case SOAP_TYPE_PointerTounsignedByte:
-		return soap_out_PointerTounsignedByte(soap, tag, id, (unsigned char *const*)ptr, "xsd:unsignedByte");
+	case SOAP_TYPE_ns2__UserDataSession:
+		return ((ns2__UserDataSession *)ptr)->soap_out(soap, tag, id, "ns2:UserDataSession");
+	case SOAP_TYPE_ns1__CloseUserSessionResponseType:
+		return ((ns1__CloseUserSessionResponseType *)ptr)->soap_out(soap, tag, id, "ns1:CloseUserSessionResponseType");
+	case SOAP_TYPE_ns1__OpenUserSessionResponseType:
+		return ((ns1__OpenUserSessionResponseType *)ptr)->soap_out(soap, tag, id, "ns1:OpenUserSessionResponseType");
+	case SOAP_TYPE_ns1__DataUserSessionType:
+		return ((ns1__DataUserSessionType *)ptr)->soap_out(soap, tag, id, "ns1:DataUserSessionType");
+	case SOAP_TYPE_PointerTons1__DataUserSessionType:
+		return soap_out_PointerTons1__DataUserSessionType(soap, tag, id, (ns1__DataUserSessionType *const*)ptr, "ns1:DataUserSessionType");
+	case SOAP_TYPE_PointerTons2__UserDataSession:
+		return soap_out_PointerTons2__UserDataSession(soap, tag, id, (ns2__UserDataSession *const*)ptr, "ns2:UserDataSession");
 	case SOAP_TYPE__QName:
 		return soap_out_string(soap, tag, id, (char*const*)(void*)&ptr, "xsd:QName");
 	case SOAP_TYPE_string:
@@ -444,50 +388,32 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_markelement(struct soap *soap, const void *ptr, 
 	(void)soap; (void)ptr; (void)type; /* appease -Wall -Werror */
 	switch (type)
 	{
-	case SOAP_TYPE_ns2__UserDataSession:
-		((ns2__UserDataSession *)ptr)->soap_serialize(soap);
-		break;
-	case SOAP_TYPE_ns2__AuthenticationType:
-		((ns2__AuthenticationType *)ptr)->soap_serialize(soap);
-		break;
-	case SOAP_TYPE_ns1__OpenUserSessionResponse:
-		((ns1__OpenUserSessionResponse *)ptr)->soap_serialize(soap);
-		break;
-	case SOAP_TYPE_ns1__OpenUserSessionRequest:
-		((ns1__OpenUserSessionRequest *)ptr)->soap_serialize(soap);
-		break;
-	case SOAP_TYPE_ns1__AccessAuthenticationResponseType:
-		((ns1__AccessAuthenticationResponseType *)ptr)->soap_serialize(soap);
-		break;
-	case SOAP_TYPE_ns1__AccessAuthenticationRequestType:
-		((ns1__AccessAuthenticationRequestType *)ptr)->soap_serialize(soap);
-		break;
-	case SOAP_TYPE_xsd__UserDataSession:
-		soap_serialize_xsd__UserDataSession(soap, (const std::string *)ptr);
-		break;
 	case SOAP_TYPE_std__string:
 		soap_serialize_std__string(soap, (const std::string *)ptr);
 		break;
-	case SOAP_TYPE_xsd__base64Binary:
-		((xsd__base64Binary *)ptr)->soap_serialize(soap);
+	case SOAP_TYPE_ns2__UserDataSession:
+		((ns2__UserDataSession *)ptr)->soap_serialize(soap);
+		break;
+	case SOAP_TYPE_ns1__CloseUserSessionResponseType:
+		((ns1__CloseUserSessionResponseType *)ptr)->soap_serialize(soap);
+		break;
+	case SOAP_TYPE_ns1__OpenUserSessionResponseType:
+		((ns1__OpenUserSessionResponseType *)ptr)->soap_serialize(soap);
+		break;
+	case SOAP_TYPE_ns1__DataUserSessionType:
+		((ns1__DataUserSessionType *)ptr)->soap_serialize(soap);
+		break;
+	case SOAP_TYPE___ns1__CloseUserSession:
+		soap_serialize___ns1__CloseUserSession(soap, (const struct __ns1__CloseUserSession *)ptr);
 		break;
 	case SOAP_TYPE___ns1__OpenUserSession:
 		soap_serialize___ns1__OpenUserSession(soap, (const struct __ns1__OpenUserSession *)ptr);
 		break;
-	case SOAP_TYPE___ns1__AccessAuthentication:
-		soap_serialize___ns1__AccessAuthentication(soap, (const struct __ns1__AccessAuthentication *)ptr);
+	case SOAP_TYPE_PointerTons1__DataUserSessionType:
+		soap_serialize_PointerTons1__DataUserSessionType(soap, (ns1__DataUserSessionType *const*)ptr);
 		break;
-	case SOAP_TYPE_PointerTons1__OpenUserSessionRequest:
-		soap_serialize_PointerTons1__OpenUserSessionRequest(soap, (ns1__OpenUserSessionRequest *const*)ptr);
-		break;
-	case SOAP_TYPE_PointerTons1__AccessAuthenticationRequestType:
-		soap_serialize_PointerTons1__AccessAuthenticationRequestType(soap, (ns1__AccessAuthenticationRequestType *const*)ptr);
-		break;
-	case SOAP_TYPE_PointerTons2__AuthenticationType:
-		soap_serialize_PointerTons2__AuthenticationType(soap, (ns2__AuthenticationType *const*)ptr);
-		break;
-	case SOAP_TYPE_PointerTounsignedByte:
-		soap_serialize_PointerTounsignedByte(soap, (unsigned char *const*)ptr);
+	case SOAP_TYPE_PointerTons2__UserDataSession:
+		soap_serialize_PointerTons2__UserDataSession(soap, (ns2__UserDataSession *const*)ptr);
 		break;
 	case SOAP_TYPE__QName:
 		soap_serialize_string(soap, (char*const*)(void*)&ptr);
@@ -529,26 +455,20 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_instantiate(struct soap *soap, int t, const ch
 {	(void)type;
 	switch (t)
 	{
-	case SOAP_TYPE_xsd__base64Binary:
-		return (void*)soap_instantiate_xsd__base64Binary(soap, -1, type, arrayType, n);
 	case SOAP_TYPE_std__string:
 		return (void*)soap_instantiate_std__string(soap, -1, type, arrayType, n);
-	case SOAP_TYPE_ns1__AccessAuthenticationRequestType:
-		return (void*)soap_instantiate_ns1__AccessAuthenticationRequestType(soap, -1, type, arrayType, n);
-	case SOAP_TYPE_ns1__AccessAuthenticationResponseType:
-		return (void*)soap_instantiate_ns1__AccessAuthenticationResponseType(soap, -1, type, arrayType, n);
-	case SOAP_TYPE_ns1__OpenUserSessionRequest:
-		return (void*)soap_instantiate_ns1__OpenUserSessionRequest(soap, -1, type, arrayType, n);
-	case SOAP_TYPE_ns1__OpenUserSessionResponse:
-		return (void*)soap_instantiate_ns1__OpenUserSessionResponse(soap, -1, type, arrayType, n);
-	case SOAP_TYPE_ns2__AuthenticationType:
-		return (void*)soap_instantiate_ns2__AuthenticationType(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_ns1__DataUserSessionType:
+		return (void*)soap_instantiate_ns1__DataUserSessionType(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_ns1__OpenUserSessionResponseType:
+		return (void*)soap_instantiate_ns1__OpenUserSessionResponseType(soap, -1, type, arrayType, n);
+	case SOAP_TYPE_ns1__CloseUserSessionResponseType:
+		return (void*)soap_instantiate_ns1__CloseUserSessionResponseType(soap, -1, type, arrayType, n);
 	case SOAP_TYPE_ns2__UserDataSession:
 		return (void*)soap_instantiate_ns2__UserDataSession(soap, -1, type, arrayType, n);
-	case SOAP_TYPE___ns1__AccessAuthentication:
-		return (void*)soap_instantiate___ns1__AccessAuthentication(soap, -1, type, arrayType, n);
 	case SOAP_TYPE___ns1__OpenUserSession:
 		return (void*)soap_instantiate___ns1__OpenUserSession(soap, -1, type, arrayType, n);
+	case SOAP_TYPE___ns1__CloseUserSession:
+		return (void*)soap_instantiate___ns1__CloseUserSession(soap, -1, type, arrayType, n);
 #ifndef WITH_NOGLOBAL
 	case SOAP_TYPE_SOAP_ENV__Header:
 		return (void*)soap_instantiate_SOAP_ENV__Header(soap, -1, type, arrayType, n);
@@ -569,8 +489,6 @@ SOAP_FMAC3 void * SOAP_FMAC4 soap_instantiate(struct soap *soap, int t, const ch
 	case SOAP_TYPE_SOAP_ENV__Fault:
 		return (void*)soap_instantiate_SOAP_ENV__Fault(soap, -1, type, arrayType, n);
 #endif
-	case SOAP_TYPE_xsd__UserDataSession:
-		return (void*)soap_instantiate_xsd__UserDataSession(soap, -1, type, arrayType, n);
 	}
 	return NULL;
 }
@@ -582,47 +500,29 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_fdelete(struct soap *soap, struct soap_clist *p)
 		return SOAP_OK;
 	switch (p->type)
 	{
-	case SOAP_TYPE_xsd__base64Binary:
-		if (p->size < 0)
-			SOAP_DELETE(soap, static_cast<xsd__base64Binary*>(p->ptr), xsd__base64Binary);
-		else
-			SOAP_DELETE_ARRAY(soap, static_cast<xsd__base64Binary*>(p->ptr), xsd__base64Binary);
-		break;
 	case SOAP_TYPE_std__string:
 		if (p->size < 0)
 			SOAP_DELETE(soap, static_cast<std::string*>(p->ptr), std::string);
 		else
 			SOAP_DELETE_ARRAY(soap, static_cast<std::string*>(p->ptr), std::string);
 		break;
-	case SOAP_TYPE_ns1__AccessAuthenticationRequestType:
+	case SOAP_TYPE_ns1__DataUserSessionType:
 		if (p->size < 0)
-			SOAP_DELETE(soap, static_cast<ns1__AccessAuthenticationRequestType*>(p->ptr), ns1__AccessAuthenticationRequestType);
+			SOAP_DELETE(soap, static_cast<ns1__DataUserSessionType*>(p->ptr), ns1__DataUserSessionType);
 		else
-			SOAP_DELETE_ARRAY(soap, static_cast<ns1__AccessAuthenticationRequestType*>(p->ptr), ns1__AccessAuthenticationRequestType);
+			SOAP_DELETE_ARRAY(soap, static_cast<ns1__DataUserSessionType*>(p->ptr), ns1__DataUserSessionType);
 		break;
-	case SOAP_TYPE_ns1__AccessAuthenticationResponseType:
+	case SOAP_TYPE_ns1__OpenUserSessionResponseType:
 		if (p->size < 0)
-			SOAP_DELETE(soap, static_cast<ns1__AccessAuthenticationResponseType*>(p->ptr), ns1__AccessAuthenticationResponseType);
+			SOAP_DELETE(soap, static_cast<ns1__OpenUserSessionResponseType*>(p->ptr), ns1__OpenUserSessionResponseType);
 		else
-			SOAP_DELETE_ARRAY(soap, static_cast<ns1__AccessAuthenticationResponseType*>(p->ptr), ns1__AccessAuthenticationResponseType);
+			SOAP_DELETE_ARRAY(soap, static_cast<ns1__OpenUserSessionResponseType*>(p->ptr), ns1__OpenUserSessionResponseType);
 		break;
-	case SOAP_TYPE_ns1__OpenUserSessionRequest:
+	case SOAP_TYPE_ns1__CloseUserSessionResponseType:
 		if (p->size < 0)
-			SOAP_DELETE(soap, static_cast<ns1__OpenUserSessionRequest*>(p->ptr), ns1__OpenUserSessionRequest);
+			SOAP_DELETE(soap, static_cast<ns1__CloseUserSessionResponseType*>(p->ptr), ns1__CloseUserSessionResponseType);
 		else
-			SOAP_DELETE_ARRAY(soap, static_cast<ns1__OpenUserSessionRequest*>(p->ptr), ns1__OpenUserSessionRequest);
-		break;
-	case SOAP_TYPE_ns1__OpenUserSessionResponse:
-		if (p->size < 0)
-			SOAP_DELETE(soap, static_cast<ns1__OpenUserSessionResponse*>(p->ptr), ns1__OpenUserSessionResponse);
-		else
-			SOAP_DELETE_ARRAY(soap, static_cast<ns1__OpenUserSessionResponse*>(p->ptr), ns1__OpenUserSessionResponse);
-		break;
-	case SOAP_TYPE_ns2__AuthenticationType:
-		if (p->size < 0)
-			SOAP_DELETE(soap, static_cast<ns2__AuthenticationType*>(p->ptr), ns2__AuthenticationType);
-		else
-			SOAP_DELETE_ARRAY(soap, static_cast<ns2__AuthenticationType*>(p->ptr), ns2__AuthenticationType);
+			SOAP_DELETE_ARRAY(soap, static_cast<ns1__CloseUserSessionResponseType*>(p->ptr), ns1__CloseUserSessionResponseType);
 		break;
 	case SOAP_TYPE_ns2__UserDataSession:
 		if (p->size < 0)
@@ -630,17 +530,17 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_fdelete(struct soap *soap, struct soap_clist *p)
 		else
 			SOAP_DELETE_ARRAY(soap, static_cast<ns2__UserDataSession*>(p->ptr), ns2__UserDataSession);
 		break;
-	case SOAP_TYPE___ns1__AccessAuthentication:
-		if (p->size < 0)
-			SOAP_DELETE(soap, static_cast<struct __ns1__AccessAuthentication*>(p->ptr), struct __ns1__AccessAuthentication);
-		else
-			SOAP_DELETE_ARRAY(soap, static_cast<struct __ns1__AccessAuthentication*>(p->ptr), struct __ns1__AccessAuthentication);
-		break;
 	case SOAP_TYPE___ns1__OpenUserSession:
 		if (p->size < 0)
 			SOAP_DELETE(soap, static_cast<struct __ns1__OpenUserSession*>(p->ptr), struct __ns1__OpenUserSession);
 		else
 			SOAP_DELETE_ARRAY(soap, static_cast<struct __ns1__OpenUserSession*>(p->ptr), struct __ns1__OpenUserSession);
+		break;
+	case SOAP_TYPE___ns1__CloseUserSession:
+		if (p->size < 0)
+			SOAP_DELETE(soap, static_cast<struct __ns1__CloseUserSession*>(p->ptr), struct __ns1__CloseUserSession);
+		else
+			SOAP_DELETE_ARRAY(soap, static_cast<struct __ns1__CloseUserSession*>(p->ptr), struct __ns1__CloseUserSession);
 		break;
 #ifndef WITH_NOGLOBAL
 	case SOAP_TYPE_SOAP_ENV__Header:
@@ -682,12 +582,6 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_fdelete(struct soap *soap, struct soap_clist *p)
 			SOAP_DELETE_ARRAY(soap, static_cast<struct SOAP_ENV__Fault*>(p->ptr), struct SOAP_ENV__Fault);
 		break;
 #endif
-	case SOAP_TYPE_xsd__UserDataSession:
-		if (p->size < 0)
-			SOAP_DELETE(soap, static_cast<std::string*>(p->ptr), std::string);
-		else
-			SOAP_DELETE_ARRAY(soap, static_cast<std::string*>(p->ptr), std::string);
-		break;
 	default:
 		return SOAP_ERR;
 	}
@@ -719,45 +613,33 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_finsert(struct soap *soap, int t, int tt, void *
 	(void)soap; (void)t; (void)p; (void)index; (void)q; (void)x; /* appease -Wall -Werror */
 	switch (tt)
 	{
-	case SOAP_TYPE_xsd__base64Binary:
-		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy xsd__base64Binary type=%d location=%p object=%p\n", t, p, q));
-		*(xsd__base64Binary*)p = *(xsd__base64Binary*)q;
-		break;
 	case SOAP_TYPE_std__string:
 		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy std::string type=%d location=%p object=%p\n", t, p, q));
 		*(std::string*)p = *(std::string*)q;
 		break;
-	case SOAP_TYPE_ns1__AccessAuthenticationRequestType:
-		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy ns1__AccessAuthenticationRequestType type=%d location=%p object=%p\n", t, p, q));
-		*(ns1__AccessAuthenticationRequestType*)p = *(ns1__AccessAuthenticationRequestType*)q;
+	case SOAP_TYPE_ns1__DataUserSessionType:
+		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy ns1__DataUserSessionType type=%d location=%p object=%p\n", t, p, q));
+		*(ns1__DataUserSessionType*)p = *(ns1__DataUserSessionType*)q;
 		break;
-	case SOAP_TYPE_ns1__AccessAuthenticationResponseType:
-		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy ns1__AccessAuthenticationResponseType type=%d location=%p object=%p\n", t, p, q));
-		*(ns1__AccessAuthenticationResponseType*)p = *(ns1__AccessAuthenticationResponseType*)q;
+	case SOAP_TYPE_ns1__OpenUserSessionResponseType:
+		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy ns1__OpenUserSessionResponseType type=%d location=%p object=%p\n", t, p, q));
+		*(ns1__OpenUserSessionResponseType*)p = *(ns1__OpenUserSessionResponseType*)q;
 		break;
-	case SOAP_TYPE_ns1__OpenUserSessionRequest:
-		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy ns1__OpenUserSessionRequest type=%d location=%p object=%p\n", t, p, q));
-		*(ns1__OpenUserSessionRequest*)p = *(ns1__OpenUserSessionRequest*)q;
-		break;
-	case SOAP_TYPE_ns1__OpenUserSessionResponse:
-		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy ns1__OpenUserSessionResponse type=%d location=%p object=%p\n", t, p, q));
-		*(ns1__OpenUserSessionResponse*)p = *(ns1__OpenUserSessionResponse*)q;
-		break;
-	case SOAP_TYPE_ns2__AuthenticationType:
-		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy ns2__AuthenticationType type=%d location=%p object=%p\n", t, p, q));
-		*(ns2__AuthenticationType*)p = *(ns2__AuthenticationType*)q;
+	case SOAP_TYPE_ns1__CloseUserSessionResponseType:
+		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy ns1__CloseUserSessionResponseType type=%d location=%p object=%p\n", t, p, q));
+		*(ns1__CloseUserSessionResponseType*)p = *(ns1__CloseUserSessionResponseType*)q;
 		break;
 	case SOAP_TYPE_ns2__UserDataSession:
 		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy ns2__UserDataSession type=%d location=%p object=%p\n", t, p, q));
 		*(ns2__UserDataSession*)p = *(ns2__UserDataSession*)q;
 		break;
-	case SOAP_TYPE___ns1__AccessAuthentication:
-		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct __ns1__AccessAuthentication type=%d location=%p object=%p\n", t, p, q));
-		*(struct __ns1__AccessAuthentication*)p = *(struct __ns1__AccessAuthentication*)q;
-		break;
 	case SOAP_TYPE___ns1__OpenUserSession:
 		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct __ns1__OpenUserSession type=%d location=%p object=%p\n", t, p, q));
 		*(struct __ns1__OpenUserSession*)p = *(struct __ns1__OpenUserSession*)q;
+		break;
+	case SOAP_TYPE___ns1__CloseUserSession:
+		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy struct __ns1__CloseUserSession type=%d location=%p object=%p\n", t, p, q));
+		*(struct __ns1__CloseUserSession*)p = *(struct __ns1__CloseUserSession*)q;
 		break;
 #ifndef WITH_NOGLOBAL
 	case SOAP_TYPE_SOAP_ENV__Header:
@@ -789,10 +671,6 @@ SOAP_FMAC3 void SOAP_FMAC4 soap_finsert(struct soap *soap, int t, int tt, void *
 		*(struct SOAP_ENV__Fault*)p = *(struct SOAP_ENV__Fault*)q;
 		break;
 #endif
-	case SOAP_TYPE_xsd__UserDataSession:
-		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Copy std::string type=%d location=%p object=%p\n", t, p, q));
-		*(std::string*)p = *(std::string*)q;
-		break;
 	default:
 		DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Could not insert type=%d in %d\n", t, tt));
 	}
@@ -865,74 +743,6 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put_int(struct soap *soap, const int *a, const ch
 SOAP_FMAC3 int * SOAP_FMAC4 soap_get_int(struct soap *soap, int *p, const char *tag, const char *type)
 {
 	if ((p = soap_in_int(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_unsignedByte(struct soap *soap, const char *tag, int id, const unsigned char *a, const char *type)
-{
-	return soap_outunsignedByte(soap, tag, id, a, type, SOAP_TYPE_unsignedByte);
-}
-
-SOAP_FMAC3 unsigned char * SOAP_FMAC4 soap_in_unsignedByte(struct soap *soap, const char *tag, unsigned char *a, const char *type)
-{
-	a = soap_inunsignedByte(soap, tag, a, type, SOAP_TYPE_unsignedByte);
-	return a;
-}
-
-SOAP_FMAC3 unsigned char * SOAP_FMAC4 soap_new_unsignedByte(struct soap *soap, int n)
-{
-	unsigned char *a = static_cast<unsigned char *>(soap_malloc(soap, (n = (n < 0 ? 1 : n)) * sizeof(unsigned char)));
-	for (unsigned char *p = a; p && n--; ++p)
-		soap_default_unsignedByte(soap, p);
-	return a;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_unsignedByte(struct soap *soap, const unsigned char *a, const char *tag, const char *type)
-{
-	if (soap_out_unsignedByte(soap, tag ? tag : "unsignedByte", -2, a, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-SOAP_FMAC3 unsigned char * SOAP_FMAC4 soap_get_unsignedByte(struct soap *soap, unsigned char *p, const char *tag, const char *type)
-{
-	if ((p = soap_in_unsignedByte(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_unsignedInt(struct soap *soap, const char *tag, int id, const unsigned int *a, const char *type)
-{
-	return soap_outunsignedInt(soap, tag, id, a, type, SOAP_TYPE_unsignedInt);
-}
-
-SOAP_FMAC3 unsigned int * SOAP_FMAC4 soap_in_unsignedInt(struct soap *soap, const char *tag, unsigned int *a, const char *type)
-{
-	a = soap_inunsignedInt(soap, tag, a, type, SOAP_TYPE_unsignedInt);
-	return a;
-}
-
-SOAP_FMAC3 unsigned int * SOAP_FMAC4 soap_new_unsignedInt(struct soap *soap, int n)
-{
-	unsigned int *a = static_cast<unsigned int *>(soap_malloc(soap, (n = (n < 0 ? 1 : n)) * sizeof(unsigned int)));
-	for (unsigned int *p = a; p && n--; ++p)
-		soap_default_unsignedInt(soap, p);
-	return a;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_unsignedInt(struct soap *soap, const unsigned int *a, const char *tag, const char *type)
-{
-	if (soap_out_unsignedInt(soap, tag ? tag : "unsignedInt", -2, a, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-SOAP_FMAC3 unsigned int * SOAP_FMAC4 soap_get_unsignedInt(struct soap *soap, unsigned int *p, const char *tag, const char *type)
-{
-	if ((p = soap_in_unsignedInt(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;
@@ -1027,6 +837,9 @@ static const struct soap_code_map soap_codes_ns2__SessionEnum[] =
 {	{ (LONG64)ns2__SessionEnum__SessionOk, "SessionOk" },
 	{ (LONG64)ns2__SessionEnum__SessionIsOpened, "SessionIsOpened" },
 	{ (LONG64)ns2__SessionEnum__SessionCannotBeOpened, "SessionCannotBeOpened" },
+	{ (LONG64)ns2__SessionEnum__SessionIsSuccessfullyClosed, "SessionIsSuccessfullyClosed" },
+	{ (LONG64)ns2__SessionEnum__SessionUnauthorizedUser, "SessionUnauthorizedUser" },
+	{ (LONG64)ns2__SessionEnum__SessionNotFound, "SessionNotFound" },
 	{ 0, NULL }
 };
 
@@ -1057,7 +870,7 @@ SOAP_FMAC3S int SOAP_FMAC4S soap_s2ns2__SessionEnum(struct soap *soap, const cha
 		return soap->error = SOAP_EMPTY;
 	else
 	{	int n;
-		if (soap_s2int(soap, s, &n) || n < 0 || n > 2)
+		if (soap_s2int(soap, s, &n) || n < 0 || n > 5)
 			return soap->error = SOAP_TYPE;
 		*a = (enum ns2__SessionEnum)n;
 	}
@@ -1113,6 +926,7 @@ static const struct soap_code_map soap_codes_ns2__ProfileEnum[] =
 	{ (LONG64)ns2__ProfileEnum__ProfileCheckout, "ProfileCheckout" },
 	{ (LONG64)ns2__ProfileEnum__ProfileKitchen, "ProfileKitchen" },
 	{ (LONG64)ns2__ProfileEnum__ProfileUser, "ProfileUser" },
+	{ (LONG64)ns2__ProfileEnum__ProfileUnknown, "ProfileUnknown" },
 	{ 0, NULL }
 };
 
@@ -1143,7 +957,7 @@ SOAP_FMAC3S int SOAP_FMAC4S soap_s2ns2__ProfileEnum(struct soap *soap, const cha
 		return soap->error = SOAP_EMPTY;
 	else
 	{	int n;
-		if (soap_s2int(soap, s, &n) || n < 0 || n > 4)
+		if (soap_s2int(soap, s, &n) || n < 0 || n > 5)
 			return soap->error = SOAP_TYPE;
 		*a = (enum ns2__ProfileEnum)n;
 	}
@@ -1193,11 +1007,91 @@ SOAP_FMAC3 enum ns2__ProfileEnum * SOAP_FMAC4 soap_get_ns2__ProfileEnum(struct s
 	return p;
 }
 
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_std__string(struct soap *soap, const std::string *a)
+{	(void)soap; (void)a; /* appease -Wall -Werror */
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_std__string(struct soap *soap, const char *tag, int id, const std::string *s, const char *type)
+{
+	if ((soap->mode & SOAP_C_NILSTRING) && s->empty())
+		return soap_element_null(soap, tag, id, type);
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, s, SOAP_TYPE_std__string), type) || soap_string_out(soap, s->c_str(), 0) || soap_element_end_out(soap, tag))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 std::string * SOAP_FMAC4 soap_in_std__string(struct soap *soap, const char *tag, std::string *s, const char *type)
+{
+	(void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_in(soap, tag, 1, NULL))
+		return NULL;
+	if (!s)
+		s = soap_new_std__string(soap, -1);
+	if (soap->null)
+		if (s)
+			s->erase();
+	if (soap->body && *soap->href != '#')
+	{	char *t;
+		s = (std::string*)soap_id_enter(soap, soap->id, s, SOAP_TYPE_std__string, sizeof(std::string), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+		if (s)
+		{	if (!(t = soap_string_in(soap, 1, 0, -1, NULL)))
+				return NULL;
+			s->assign(t);
+		}
+	}
+	else
+		s = (std::string*)soap_id_forward(soap, soap->href, soap_id_enter(soap, soap->id, s, SOAP_TYPE_std__string, sizeof(std::string), soap->type, soap->arrayType, soap_instantiate, soap_fbase), 0, SOAP_TYPE_std__string, SOAP_TYPE_std__string, sizeof(std::string), 0, soap_finsert, NULL);
+	if (soap->body && soap_element_end_in(soap, tag))
+		return NULL;
+	return s;
+}
+
+SOAP_FMAC1 std::string * SOAP_FMAC2 soap_instantiate_std__string(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_std__string(%p, %d, %s, %s)\n", (void*)soap, n, type?type:"", arrayType?arrayType:""));
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	std::string *p;
+	size_t k = sizeof(std::string);
+	struct soap_clist *cp = soap_link(soap, SOAP_TYPE_std__string, n, soap_fdelete);
+	if (!cp && soap && n != SOAP_NO_LINK_TO_DELETE)
+		return NULL;
+	if (n < 0)
+	{	p = SOAP_NEW(soap, std::string);
+	}
+	else
+	{	p = SOAP_NEW_ARRAY(soap, std::string, n);
+		k *= n;
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated std::string location=%p n=%d\n", (void*)p, n));
+	if (size)
+		*size = k;
+	if (!p)
+		soap->error = SOAP_EOM;
+	else if (cp)
+		cp->ptr = (void*)p;
+	return p;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_std__string(struct soap *soap, const std::string *a, const char *tag, const char *type)
+{
+	if (soap_out_std__string(soap, tag ? tag : "string", -2, a, type))
+		return soap->error;
+	return soap_putindependent(soap);
+}
+
+SOAP_FMAC3 std::string * SOAP_FMAC4 soap_get_std__string(struct soap *soap, std::string *p, const char *tag, const char *type)
+{
+	if ((p = soap_in_std__string(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
 void ns2__UserDataSession::soap_default(struct soap *soap)
 {
 	this->soap = soap;
 	soap_default_std__string(soap, &this->ns2__UserDataSession::fullName);
-	this->ns2__UserDataSession::challenge.xsd__base64Binary::soap_default(soap);
+	soap_default_int(soap, &this->ns2__UserDataSession::challenge);
 	soap_default_ns2__ProfileEnum(soap, &this->ns2__UserDataSession::profileType);
 }
 
@@ -1206,7 +1100,6 @@ void ns2__UserDataSession::soap_serialize(struct soap *soap) const
 	(void)soap; /* appease -Wall -Werror */
 #ifndef WITH_NOIDREF
 	soap_serialize_std__string(soap, &this->ns2__UserDataSession::fullName);
-	this->ns2__UserDataSession::challenge.soap_serialize(soap);
 #endif
 }
 
@@ -1222,7 +1115,7 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns2__UserDataSession(struct soap *soap, const
 		return soap->error;
 	if (soap_out_std__string(soap, "ns2:fullName", -1, &a->ns2__UserDataSession::fullName, ""))
 		return soap->error;
-	if ((a->ns2__UserDataSession::challenge).soap_out(soap, "ns2:challenge", -1, ""))
+	if (soap_out_int(soap, "ns2:challenge", -1, &a->ns2__UserDataSession::challenge, ""))
 		return soap->error;
 	if (soap_out_ns2__ProfileEnum(soap, "ns2:profileType", -1, &a->ns2__UserDataSession::profileType, ""))
 		return soap->error;
@@ -1263,7 +1156,7 @@ SOAP_FMAC3 ns2__UserDataSession * SOAP_FMAC4 soap_in_ns2__UserDataSession(struct
 				}
 			}
 			if (soap_flag_challenge1 && soap->error == SOAP_TAG_MISMATCH)
-			{	if ((a->ns2__UserDataSession::challenge).soap_in(soap, "ns2:challenge", "xsd:base64Binary"))
+			{	if (soap_in_int(soap, "ns2:challenge", &a->ns2__UserDataSession::challenge, "xsd:int"))
 				{	soap_flag_challenge1--;
 					continue;
 				}
@@ -1351,529 +1244,54 @@ SOAP_FMAC3 ns2__UserDataSession * SOAP_FMAC4 soap_get_ns2__UserDataSession(struc
 	return p;
 }
 
-void ns2__AuthenticationType::soap_default(struct soap *soap)
+void ns1__CloseUserSessionResponseType::soap_default(struct soap *soap)
 {
 	this->soap = soap;
-	soap_default_std__string(soap, &this->ns2__AuthenticationType::company);
-	soap_default_std__string(soap, &this->ns2__AuthenticationType::credentials);
-	this->ns2__AuthenticationType::signature.xsd__base64Binary::soap_default(soap);
+	soap_default_ns2__SessionEnum(soap, &this->ns1__CloseUserSessionResponseType::response);
+	soap_default_bool(soap, &this->ns1__CloseUserSessionResponseType::success);
 }
 
-void ns2__AuthenticationType::soap_serialize(struct soap *soap) const
-{
-	(void)soap; /* appease -Wall -Werror */
-#ifndef WITH_NOIDREF
-	soap_serialize_std__string(soap, &this->ns2__AuthenticationType::company);
-	soap_serialize_std__string(soap, &this->ns2__AuthenticationType::credentials);
-	this->ns2__AuthenticationType::signature.soap_serialize(soap);
-#endif
-}
-
-int ns2__AuthenticationType::soap_out(struct soap *soap, const char *tag, int id, const char *type) const
-{
-	return soap_out_ns2__AuthenticationType(soap, tag, id, this, type);
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns2__AuthenticationType(struct soap *soap, const char *tag, int id, const ns2__AuthenticationType *a, const char *type)
-{
-	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns2__AuthenticationType), type))
-		return soap->error;
-	if (soap_out_std__string(soap, "ns2:company", -1, &a->ns2__AuthenticationType::company, ""))
-		return soap->error;
-	if (soap_out_std__string(soap, "ns2:credentials", -1, &a->ns2__AuthenticationType::credentials, ""))
-		return soap->error;
-	if ((a->ns2__AuthenticationType::signature).soap_out(soap, "ns2:signature", -1, ""))
-		return soap->error;
-	return soap_element_end_out(soap, tag);
-}
-
-void *ns2__AuthenticationType::soap_in(struct soap *soap, const char *tag, const char *type)
-{
-	return soap_in_ns2__AuthenticationType(soap, tag, this, type);
-}
-
-SOAP_FMAC3 ns2__AuthenticationType * SOAP_FMAC4 soap_in_ns2__AuthenticationType(struct soap *soap, const char *tag, ns2__AuthenticationType *a, const char *type)
-{
-	(void)type; /* appease -Wall -Werror */
-	if (soap_element_begin_in(soap, tag, 0, NULL))
-		return NULL;
-	a = (ns2__AuthenticationType*)soap_id_enter(soap, soap->id, a, SOAP_TYPE_ns2__AuthenticationType, sizeof(ns2__AuthenticationType), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
-	if (!a)
-		return NULL;
-	if (soap->alloced && soap->alloced != SOAP_TYPE_ns2__AuthenticationType)
-	{	soap_revert(soap);
-		*soap->id = '\0';
-		return (ns2__AuthenticationType *)a->soap_in(soap, tag, type);
-	}
-	if (soap->alloced)
-		a->soap_default(soap);
-	size_t soap_flag_company1 = 1;
-	size_t soap_flag_credentials1 = 1;
-	size_t soap_flag_signature1 = 1;
-	if (soap->body && *soap->href != '#')
-	{
-		for (;;)
-		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap_flag_company1 && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
-			{	if (soap_in_std__string(soap, "ns2:company", &a->ns2__AuthenticationType::company, "xsd:string"))
-				{	soap_flag_company1--;
-					continue;
-				}
-			}
-			if (soap_flag_credentials1 && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
-			{	if (soap_in_std__string(soap, "ns2:credentials", &a->ns2__AuthenticationType::credentials, "xsd:string"))
-				{	soap_flag_credentials1--;
-					continue;
-				}
-			}
-			if (soap_flag_signature1 && soap->error == SOAP_TAG_MISMATCH)
-			{	if ((a->ns2__AuthenticationType::signature).soap_in(soap, "ns2:signature", "xsd:base64Binary"))
-				{	soap_flag_signature1--;
-					continue;
-				}
-			}
-			if (soap->error == SOAP_TAG_MISMATCH)
-				soap->error = soap_ignore_element(soap);
-			if (soap->error == SOAP_NO_TAG)
-				break;
-			if (soap->error)
-				return NULL;
-		}
-		if (soap_element_end_in(soap, tag))
-			return NULL;
-		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_company1 > 0 || soap_flag_credentials1 > 0 || soap_flag_signature1 > 0))
-		{	soap->error = SOAP_OCCURS;
-			return NULL;
-		}
-	}
-	else if ((soap->mode & SOAP_XML_STRICT) && *soap->href != '#')
-	{	soap->error = SOAP_OCCURS;
-		return NULL;
-	}
-	else
-	{	a = (ns2__AuthenticationType *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns2__AuthenticationType, SOAP_TYPE_ns2__AuthenticationType, sizeof(ns2__AuthenticationType), 0, soap_finsert, soap_fbase);
-		if (soap->body && soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	return a;
-}
-
-SOAP_FMAC1 ns2__AuthenticationType * SOAP_FMAC2 soap_instantiate_ns2__AuthenticationType(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
-{
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns2__AuthenticationType(%p, %d, %s, %s)\n", (void*)soap, n, type?type:"", arrayType?arrayType:""));
-	(void)type; (void)arrayType; /* appease -Wall -Werror */
-	ns2__AuthenticationType *p;
-	size_t k = sizeof(ns2__AuthenticationType);
-	struct soap_clist *cp = soap_link(soap, SOAP_TYPE_ns2__AuthenticationType, n, soap_fdelete);
-	if (!cp && soap && n != SOAP_NO_LINK_TO_DELETE)
-		return NULL;
-	if (n < 0)
-	{	p = SOAP_NEW(soap, ns2__AuthenticationType);
-		if (p)
-			p->soap = soap;
-	}
-	else
-	{	p = SOAP_NEW_ARRAY(soap, ns2__AuthenticationType, n);
-		k *= n;
-		if (p)
-			for (int i = 0; i < n; i++)
-				p[i].soap = soap;
-	}
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated ns2__AuthenticationType location=%p n=%d\n", (void*)p, n));
-	if (size)
-		*size = k;
-	if (!p)
-		soap->error = SOAP_EOM;
-	else if (cp)
-		cp->ptr = (void*)p;
-	return p;
-}
-
-int ns2__AuthenticationType::soap_put(struct soap *soap, const char *tag, const  char *type) const
-{
-	if (soap_out_ns2__AuthenticationType(soap, tag ? tag : "ns2:AuthenticationType", -2, this, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-void *ns2__AuthenticationType::soap_get(struct soap *soap, const char *tag, const char *type)
-{
-	return soap_get_ns2__AuthenticationType(soap, this, tag, type);
-}
-
-SOAP_FMAC3 ns2__AuthenticationType * SOAP_FMAC4 soap_get_ns2__AuthenticationType(struct soap *soap, ns2__AuthenticationType *p, const char *tag, const char *type)
-{
-	if ((p = soap_in_ns2__AuthenticationType(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-void ns1__OpenUserSessionResponse::soap_default(struct soap *soap)
-{
-	this->soap = soap;
-	soap_default_xsd__UserDataSession(soap, &this->ns1__OpenUserSessionResponse::userDataSession);
-	soap_default_ns2__SessionEnum(soap, &this->ns1__OpenUserSessionResponse::response);
-	soap_default_bool(soap, &this->ns1__OpenUserSessionResponse::success);
-}
-
-void ns1__OpenUserSessionResponse::soap_serialize(struct soap *soap) const
-{
-	(void)soap; /* appease -Wall -Werror */
-#ifndef WITH_NOIDREF
-	soap_serialize_xsd__UserDataSession(soap, &this->ns1__OpenUserSessionResponse::userDataSession);
-#endif
-}
-
-int ns1__OpenUserSessionResponse::soap_out(struct soap *soap, const char *tag, int id, const char *type) const
-{
-	return soap_out_ns1__OpenUserSessionResponse(soap, tag, id, this, type);
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__OpenUserSessionResponse(struct soap *soap, const char *tag, int id, const ns1__OpenUserSessionResponse *a, const char *type)
-{
-	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__OpenUserSessionResponse), type))
-		return soap->error;
-	if (soap_out_xsd__UserDataSession(soap, "userDataSession", -1, &a->ns1__OpenUserSessionResponse::userDataSession, ""))
-		return soap->error;
-	if (soap_out_ns2__SessionEnum(soap, "response", -1, &a->ns1__OpenUserSessionResponse::response, ""))
-		return soap->error;
-	if (soap_out_bool(soap, "success", -1, &a->ns1__OpenUserSessionResponse::success, ""))
-		return soap->error;
-	return soap_element_end_out(soap, tag);
-}
-
-void *ns1__OpenUserSessionResponse::soap_in(struct soap *soap, const char *tag, const char *type)
-{
-	return soap_in_ns1__OpenUserSessionResponse(soap, tag, this, type);
-}
-
-SOAP_FMAC3 ns1__OpenUserSessionResponse * SOAP_FMAC4 soap_in_ns1__OpenUserSessionResponse(struct soap *soap, const char *tag, ns1__OpenUserSessionResponse *a, const char *type)
-{
-	(void)type; /* appease -Wall -Werror */
-	if (soap_element_begin_in(soap, tag, 0, NULL))
-		return NULL;
-	a = (ns1__OpenUserSessionResponse*)soap_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__OpenUserSessionResponse, sizeof(ns1__OpenUserSessionResponse), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
-	if (!a)
-		return NULL;
-	if (soap->alloced && soap->alloced != SOAP_TYPE_ns1__OpenUserSessionResponse)
-	{	soap_revert(soap);
-		*soap->id = '\0';
-		return (ns1__OpenUserSessionResponse *)a->soap_in(soap, tag, type);
-	}
-	if (soap->alloced)
-		a->soap_default(soap);
-	size_t soap_flag_userDataSession1 = 1;
-	size_t soap_flag_response1 = 1;
-	size_t soap_flag_success1 = 1;
-	if (soap->body && *soap->href != '#')
-	{
-		for (;;)
-		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap_flag_userDataSession1 && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
-			{	if (soap_in_xsd__UserDataSession(soap, "userDataSession", &a->ns1__OpenUserSessionResponse::userDataSession, "xsd:UserDataSession"))
-				{	soap_flag_userDataSession1--;
-					continue;
-				}
-			}
-			if (soap_flag_response1 && soap->error == SOAP_TAG_MISMATCH)
-			{	if (soap_in_ns2__SessionEnum(soap, "response", &a->ns1__OpenUserSessionResponse::response, "ns2:SessionEnum"))
-				{	soap_flag_response1--;
-					continue;
-				}
-			}
-			if (soap_flag_success1 && soap->error == SOAP_TAG_MISMATCH)
-			{	if (soap_in_bool(soap, "success", &a->ns1__OpenUserSessionResponse::success, "xsd:boolean"))
-				{	soap_flag_success1--;
-					continue;
-				}
-			}
-			if (soap->error == SOAP_TAG_MISMATCH)
-				soap->error = soap_ignore_element(soap);
-			if (soap->error == SOAP_NO_TAG)
-				break;
-			if (soap->error)
-				return NULL;
-		}
-		if (soap_element_end_in(soap, tag))
-			return NULL;
-		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_userDataSession1 > 0 || soap_flag_response1 > 0 || soap_flag_success1 > 0))
-		{	soap->error = SOAP_OCCURS;
-			return NULL;
-		}
-	}
-	else if ((soap->mode & SOAP_XML_STRICT) && *soap->href != '#')
-	{	soap->error = SOAP_OCCURS;
-		return NULL;
-	}
-	else
-	{	a = (ns1__OpenUserSessionResponse *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__OpenUserSessionResponse, SOAP_TYPE_ns1__OpenUserSessionResponse, sizeof(ns1__OpenUserSessionResponse), 0, soap_finsert, soap_fbase);
-		if (soap->body && soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	return a;
-}
-
-SOAP_FMAC1 ns1__OpenUserSessionResponse * SOAP_FMAC2 soap_instantiate_ns1__OpenUserSessionResponse(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
-{
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns1__OpenUserSessionResponse(%p, %d, %s, %s)\n", (void*)soap, n, type?type:"", arrayType?arrayType:""));
-	(void)type; (void)arrayType; /* appease -Wall -Werror */
-	ns1__OpenUserSessionResponse *p;
-	size_t k = sizeof(ns1__OpenUserSessionResponse);
-	struct soap_clist *cp = soap_link(soap, SOAP_TYPE_ns1__OpenUserSessionResponse, n, soap_fdelete);
-	if (!cp && soap && n != SOAP_NO_LINK_TO_DELETE)
-		return NULL;
-	if (n < 0)
-	{	p = SOAP_NEW(soap, ns1__OpenUserSessionResponse);
-		if (p)
-			p->soap = soap;
-	}
-	else
-	{	p = SOAP_NEW_ARRAY(soap, ns1__OpenUserSessionResponse, n);
-		k *= n;
-		if (p)
-			for (int i = 0; i < n; i++)
-				p[i].soap = soap;
-	}
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated ns1__OpenUserSessionResponse location=%p n=%d\n", (void*)p, n));
-	if (size)
-		*size = k;
-	if (!p)
-		soap->error = SOAP_EOM;
-	else if (cp)
-		cp->ptr = (void*)p;
-	return p;
-}
-
-int ns1__OpenUserSessionResponse::soap_put(struct soap *soap, const char *tag, const  char *type) const
-{
-	if (soap_out_ns1__OpenUserSessionResponse(soap, tag ? tag : "ns1:OpenUserSessionResponse", -2, this, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-void *ns1__OpenUserSessionResponse::soap_get(struct soap *soap, const char *tag, const char *type)
-{
-	return soap_get_ns1__OpenUserSessionResponse(soap, this, tag, type);
-}
-
-SOAP_FMAC3 ns1__OpenUserSessionResponse * SOAP_FMAC4 soap_get_ns1__OpenUserSessionResponse(struct soap *soap, ns1__OpenUserSessionResponse *p, const char *tag, const char *type)
-{
-	if ((p = soap_in_ns1__OpenUserSessionResponse(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-void ns1__OpenUserSessionRequest::soap_default(struct soap *soap)
-{
-	this->soap = soap;
-	soap_default_std__string(soap, &this->ns1__OpenUserSessionRequest::userName);
-	soap_default_std__string(soap, &this->ns1__OpenUserSessionRequest::passwd);
-	soap_default_std__string(soap, &this->ns1__OpenUserSessionRequest::deviceId);
-}
-
-void ns1__OpenUserSessionRequest::soap_serialize(struct soap *soap) const
-{
-	(void)soap; /* appease -Wall -Werror */
-#ifndef WITH_NOIDREF
-	soap_serialize_std__string(soap, &this->ns1__OpenUserSessionRequest::userName);
-	soap_serialize_std__string(soap, &this->ns1__OpenUserSessionRequest::passwd);
-	soap_serialize_std__string(soap, &this->ns1__OpenUserSessionRequest::deviceId);
-#endif
-}
-
-int ns1__OpenUserSessionRequest::soap_out(struct soap *soap, const char *tag, int id, const char *type) const
-{
-	return soap_out_ns1__OpenUserSessionRequest(soap, tag, id, this, type);
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__OpenUserSessionRequest(struct soap *soap, const char *tag, int id, const ns1__OpenUserSessionRequest *a, const char *type)
-{
-	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__OpenUserSessionRequest), type))
-		return soap->error;
-	if (soap_out_std__string(soap, "userName", -1, &a->ns1__OpenUserSessionRequest::userName, ""))
-		return soap->error;
-	if (soap_out_std__string(soap, "passwd", -1, &a->ns1__OpenUserSessionRequest::passwd, ""))
-		return soap->error;
-	if (soap_out_std__string(soap, "deviceId", -1, &a->ns1__OpenUserSessionRequest::deviceId, ""))
-		return soap->error;
-	return soap_element_end_out(soap, tag);
-}
-
-void *ns1__OpenUserSessionRequest::soap_in(struct soap *soap, const char *tag, const char *type)
-{
-	return soap_in_ns1__OpenUserSessionRequest(soap, tag, this, type);
-}
-
-SOAP_FMAC3 ns1__OpenUserSessionRequest * SOAP_FMAC4 soap_in_ns1__OpenUserSessionRequest(struct soap *soap, const char *tag, ns1__OpenUserSessionRequest *a, const char *type)
-{
-	(void)type; /* appease -Wall -Werror */
-	if (soap_element_begin_in(soap, tag, 0, NULL))
-		return NULL;
-	a = (ns1__OpenUserSessionRequest*)soap_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__OpenUserSessionRequest, sizeof(ns1__OpenUserSessionRequest), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
-	if (!a)
-		return NULL;
-	if (soap->alloced && soap->alloced != SOAP_TYPE_ns1__OpenUserSessionRequest)
-	{	soap_revert(soap);
-		*soap->id = '\0';
-		return (ns1__OpenUserSessionRequest *)a->soap_in(soap, tag, type);
-	}
-	if (soap->alloced)
-		a->soap_default(soap);
-	size_t soap_flag_userName1 = 1;
-	size_t soap_flag_passwd1 = 1;
-	size_t soap_flag_deviceId1 = 1;
-	if (soap->body && *soap->href != '#')
-	{
-		for (;;)
-		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap_flag_userName1 && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
-			{	if (soap_in_std__string(soap, "userName", &a->ns1__OpenUserSessionRequest::userName, "xsd:string"))
-				{	soap_flag_userName1--;
-					continue;
-				}
-			}
-			if (soap_flag_passwd1 && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
-			{	if (soap_in_std__string(soap, "passwd", &a->ns1__OpenUserSessionRequest::passwd, "xsd:string"))
-				{	soap_flag_passwd1--;
-					continue;
-				}
-			}
-			if (soap_flag_deviceId1 && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
-			{	if (soap_in_std__string(soap, "deviceId", &a->ns1__OpenUserSessionRequest::deviceId, "xsd:string"))
-				{	soap_flag_deviceId1--;
-					continue;
-				}
-			}
-			if (soap->error == SOAP_TAG_MISMATCH)
-				soap->error = soap_ignore_element(soap);
-			if (soap->error == SOAP_NO_TAG)
-				break;
-			if (soap->error)
-				return NULL;
-		}
-		if (soap_element_end_in(soap, tag))
-			return NULL;
-		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_userName1 > 0 || soap_flag_passwd1 > 0 || soap_flag_deviceId1 > 0))
-		{	soap->error = SOAP_OCCURS;
-			return NULL;
-		}
-	}
-	else if ((soap->mode & SOAP_XML_STRICT) && *soap->href != '#')
-	{	soap->error = SOAP_OCCURS;
-		return NULL;
-	}
-	else
-	{	a = (ns1__OpenUserSessionRequest *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__OpenUserSessionRequest, SOAP_TYPE_ns1__OpenUserSessionRequest, sizeof(ns1__OpenUserSessionRequest), 0, soap_finsert, soap_fbase);
-		if (soap->body && soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	return a;
-}
-
-SOAP_FMAC1 ns1__OpenUserSessionRequest * SOAP_FMAC2 soap_instantiate_ns1__OpenUserSessionRequest(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
-{
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns1__OpenUserSessionRequest(%p, %d, %s, %s)\n", (void*)soap, n, type?type:"", arrayType?arrayType:""));
-	(void)type; (void)arrayType; /* appease -Wall -Werror */
-	ns1__OpenUserSessionRequest *p;
-	size_t k = sizeof(ns1__OpenUserSessionRequest);
-	struct soap_clist *cp = soap_link(soap, SOAP_TYPE_ns1__OpenUserSessionRequest, n, soap_fdelete);
-	if (!cp && soap && n != SOAP_NO_LINK_TO_DELETE)
-		return NULL;
-	if (n < 0)
-	{	p = SOAP_NEW(soap, ns1__OpenUserSessionRequest);
-		if (p)
-			p->soap = soap;
-	}
-	else
-	{	p = SOAP_NEW_ARRAY(soap, ns1__OpenUserSessionRequest, n);
-		k *= n;
-		if (p)
-			for (int i = 0; i < n; i++)
-				p[i].soap = soap;
-	}
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated ns1__OpenUserSessionRequest location=%p n=%d\n", (void*)p, n));
-	if (size)
-		*size = k;
-	if (!p)
-		soap->error = SOAP_EOM;
-	else if (cp)
-		cp->ptr = (void*)p;
-	return p;
-}
-
-int ns1__OpenUserSessionRequest::soap_put(struct soap *soap, const char *tag, const  char *type) const
-{
-	if (soap_out_ns1__OpenUserSessionRequest(soap, tag ? tag : "ns1:OpenUserSessionRequest", -2, this, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-void *ns1__OpenUserSessionRequest::soap_get(struct soap *soap, const char *tag, const char *type)
-{
-	return soap_get_ns1__OpenUserSessionRequest(soap, this, tag, type);
-}
-
-SOAP_FMAC3 ns1__OpenUserSessionRequest * SOAP_FMAC4 soap_get_ns1__OpenUserSessionRequest(struct soap *soap, ns1__OpenUserSessionRequest *p, const char *tag, const char *type)
-{
-	if ((p = soap_in_ns1__OpenUserSessionRequest(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-void ns1__AccessAuthenticationResponseType::soap_default(struct soap *soap)
-{
-	this->soap = soap;
-	soap_default_bool(soap, &this->ns1__AccessAuthenticationResponseType::response);
-	soap_default_bool(soap, &this->ns1__AccessAuthenticationResponseType::success);
-}
-
-void ns1__AccessAuthenticationResponseType::soap_serialize(struct soap *soap) const
+void ns1__CloseUserSessionResponseType::soap_serialize(struct soap *soap) const
 {
 	(void)soap; /* appease -Wall -Werror */
 #ifndef WITH_NOIDREF
 #endif
 }
 
-int ns1__AccessAuthenticationResponseType::soap_out(struct soap *soap, const char *tag, int id, const char *type) const
+int ns1__CloseUserSessionResponseType::soap_out(struct soap *soap, const char *tag, int id, const char *type) const
 {
-	return soap_out_ns1__AccessAuthenticationResponseType(soap, tag, id, this, type);
+	return soap_out_ns1__CloseUserSessionResponseType(soap, tag, id, this, type);
 }
 
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__AccessAuthenticationResponseType(struct soap *soap, const char *tag, int id, const ns1__AccessAuthenticationResponseType *a, const char *type)
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__CloseUserSessionResponseType(struct soap *soap, const char *tag, int id, const ns1__CloseUserSessionResponseType *a, const char *type)
 {
 	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__AccessAuthenticationResponseType), type))
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__CloseUserSessionResponseType), type))
 		return soap->error;
-	if (soap_out_bool(soap, "response", -1, &a->ns1__AccessAuthenticationResponseType::response, ""))
+	if (soap_out_ns2__SessionEnum(soap, "response", -1, &a->ns1__CloseUserSessionResponseType::response, ""))
 		return soap->error;
-	if (soap_out_bool(soap, "success", -1, &a->ns1__AccessAuthenticationResponseType::success, ""))
+	if (soap_out_bool(soap, "success", -1, &a->ns1__CloseUserSessionResponseType::success, ""))
 		return soap->error;
 	return soap_element_end_out(soap, tag);
 }
 
-void *ns1__AccessAuthenticationResponseType::soap_in(struct soap *soap, const char *tag, const char *type)
+void *ns1__CloseUserSessionResponseType::soap_in(struct soap *soap, const char *tag, const char *type)
 {
-	return soap_in_ns1__AccessAuthenticationResponseType(soap, tag, this, type);
+	return soap_in_ns1__CloseUserSessionResponseType(soap, tag, this, type);
 }
 
-SOAP_FMAC3 ns1__AccessAuthenticationResponseType * SOAP_FMAC4 soap_in_ns1__AccessAuthenticationResponseType(struct soap *soap, const char *tag, ns1__AccessAuthenticationResponseType *a, const char *type)
+SOAP_FMAC3 ns1__CloseUserSessionResponseType * SOAP_FMAC4 soap_in_ns1__CloseUserSessionResponseType(struct soap *soap, const char *tag, ns1__CloseUserSessionResponseType *a, const char *type)
 {
 	(void)type; /* appease -Wall -Werror */
 	if (soap_element_begin_in(soap, tag, 0, NULL))
 		return NULL;
-	a = (ns1__AccessAuthenticationResponseType*)soap_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__AccessAuthenticationResponseType, sizeof(ns1__AccessAuthenticationResponseType), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+	a = (ns1__CloseUserSessionResponseType*)soap_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__CloseUserSessionResponseType, sizeof(ns1__CloseUserSessionResponseType), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
 	if (!a)
 		return NULL;
-	if (soap->alloced && soap->alloced != SOAP_TYPE_ns1__AccessAuthenticationResponseType)
+	if (soap->alloced && soap->alloced != SOAP_TYPE_ns1__CloseUserSessionResponseType)
 	{	soap_revert(soap);
 		*soap->id = '\0';
-		return (ns1__AccessAuthenticationResponseType *)a->soap_in(soap, tag, type);
+		return (ns1__CloseUserSessionResponseType *)a->soap_in(soap, tag, type);
 	}
 	if (soap->alloced)
 		a->soap_default(soap);
@@ -1884,13 +1302,13 @@ SOAP_FMAC3 ns1__AccessAuthenticationResponseType * SOAP_FMAC4 soap_in_ns1__Acces
 		for (;;)
 		{	soap->error = SOAP_TAG_MISMATCH;
 			if (soap_flag_response1 && soap->error == SOAP_TAG_MISMATCH)
-			{	if (soap_in_bool(soap, "response", &a->ns1__AccessAuthenticationResponseType::response, "xsd:boolean"))
+			{	if (soap_in_ns2__SessionEnum(soap, "response", &a->ns1__CloseUserSessionResponseType::response, "ns2:SessionEnum"))
 				{	soap_flag_response1--;
 					continue;
 				}
 			}
 			if (soap_flag_success1 && soap->error == SOAP_TAG_MISMATCH)
-			{	if (soap_in_bool(soap, "success", &a->ns1__AccessAuthenticationResponseType::success, "xsd:boolean"))
+			{	if (soap_in_bool(soap, "success", &a->ns1__CloseUserSessionResponseType::success, "xsd:boolean"))
 				{	soap_flag_success1--;
 					continue;
 				}
@@ -1914,35 +1332,35 @@ SOAP_FMAC3 ns1__AccessAuthenticationResponseType * SOAP_FMAC4 soap_in_ns1__Acces
 		return NULL;
 	}
 	else
-	{	a = (ns1__AccessAuthenticationResponseType *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__AccessAuthenticationResponseType, SOAP_TYPE_ns1__AccessAuthenticationResponseType, sizeof(ns1__AccessAuthenticationResponseType), 0, soap_finsert, soap_fbase);
+	{	a = (ns1__CloseUserSessionResponseType *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__CloseUserSessionResponseType, SOAP_TYPE_ns1__CloseUserSessionResponseType, sizeof(ns1__CloseUserSessionResponseType), 0, soap_finsert, soap_fbase);
 		if (soap->body && soap_element_end_in(soap, tag))
 			return NULL;
 	}
 	return a;
 }
 
-SOAP_FMAC1 ns1__AccessAuthenticationResponseType * SOAP_FMAC2 soap_instantiate_ns1__AccessAuthenticationResponseType(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+SOAP_FMAC1 ns1__CloseUserSessionResponseType * SOAP_FMAC2 soap_instantiate_ns1__CloseUserSessionResponseType(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
 {
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns1__AccessAuthenticationResponseType(%p, %d, %s, %s)\n", (void*)soap, n, type?type:"", arrayType?arrayType:""));
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns1__CloseUserSessionResponseType(%p, %d, %s, %s)\n", (void*)soap, n, type?type:"", arrayType?arrayType:""));
 	(void)type; (void)arrayType; /* appease -Wall -Werror */
-	ns1__AccessAuthenticationResponseType *p;
-	size_t k = sizeof(ns1__AccessAuthenticationResponseType);
-	struct soap_clist *cp = soap_link(soap, SOAP_TYPE_ns1__AccessAuthenticationResponseType, n, soap_fdelete);
+	ns1__CloseUserSessionResponseType *p;
+	size_t k = sizeof(ns1__CloseUserSessionResponseType);
+	struct soap_clist *cp = soap_link(soap, SOAP_TYPE_ns1__CloseUserSessionResponseType, n, soap_fdelete);
 	if (!cp && soap && n != SOAP_NO_LINK_TO_DELETE)
 		return NULL;
 	if (n < 0)
-	{	p = SOAP_NEW(soap, ns1__AccessAuthenticationResponseType);
+	{	p = SOAP_NEW(soap, ns1__CloseUserSessionResponseType);
 		if (p)
 			p->soap = soap;
 	}
 	else
-	{	p = SOAP_NEW_ARRAY(soap, ns1__AccessAuthenticationResponseType, n);
+	{	p = SOAP_NEW_ARRAY(soap, ns1__CloseUserSessionResponseType, n);
 		k *= n;
 		if (p)
 			for (int i = 0; i < n; i++)
 				p[i].soap = soap;
 	}
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated ns1__AccessAuthenticationResponseType location=%p n=%d\n", (void*)p, n));
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated ns1__CloseUserSessionResponseType location=%p n=%d\n", (void*)p, n));
 	if (size)
 		*size = k;
 	if (!p)
@@ -1952,87 +1370,107 @@ SOAP_FMAC1 ns1__AccessAuthenticationResponseType * SOAP_FMAC2 soap_instantiate_n
 	return p;
 }
 
-int ns1__AccessAuthenticationResponseType::soap_put(struct soap *soap, const char *tag, const  char *type) const
+int ns1__CloseUserSessionResponseType::soap_put(struct soap *soap, const char *tag, const  char *type) const
 {
-	if (soap_out_ns1__AccessAuthenticationResponseType(soap, tag ? tag : "ns1:AccessAuthenticationResponseType", -2, this, type))
+	if (soap_out_ns1__CloseUserSessionResponseType(soap, tag ? tag : "ns1:CloseUserSessionResponseType", -2, this, type))
 		return soap->error;
 	return soap_putindependent(soap);
 }
 
-void *ns1__AccessAuthenticationResponseType::soap_get(struct soap *soap, const char *tag, const char *type)
+void *ns1__CloseUserSessionResponseType::soap_get(struct soap *soap, const char *tag, const char *type)
 {
-	return soap_get_ns1__AccessAuthenticationResponseType(soap, this, tag, type);
+	return soap_get_ns1__CloseUserSessionResponseType(soap, this, tag, type);
 }
 
-SOAP_FMAC3 ns1__AccessAuthenticationResponseType * SOAP_FMAC4 soap_get_ns1__AccessAuthenticationResponseType(struct soap *soap, ns1__AccessAuthenticationResponseType *p, const char *tag, const char *type)
+SOAP_FMAC3 ns1__CloseUserSessionResponseType * SOAP_FMAC4 soap_get_ns1__CloseUserSessionResponseType(struct soap *soap, ns1__CloseUserSessionResponseType *p, const char *tag, const char *type)
 {
-	if ((p = soap_in_ns1__AccessAuthenticationResponseType(soap, tag, p, type)))
+	if ((p = soap_in_ns1__CloseUserSessionResponseType(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;
 }
 
-void ns1__AccessAuthenticationRequestType::soap_default(struct soap *soap)
+void ns1__OpenUserSessionResponseType::soap_default(struct soap *soap)
 {
 	this->soap = soap;
-	this->ns1__AccessAuthenticationRequestType::AuthRequest = NULL;
+	this->ns1__OpenUserSessionResponseType::userDataSession = NULL;
+	soap_default_ns2__SessionEnum(soap, &this->ns1__OpenUserSessionResponseType::response);
+	soap_default_bool(soap, &this->ns1__OpenUserSessionResponseType::success);
 }
 
-void ns1__AccessAuthenticationRequestType::soap_serialize(struct soap *soap) const
+void ns1__OpenUserSessionResponseType::soap_serialize(struct soap *soap) const
 {
 	(void)soap; /* appease -Wall -Werror */
 #ifndef WITH_NOIDREF
-	soap_serialize_PointerTons2__AuthenticationType(soap, &this->ns1__AccessAuthenticationRequestType::AuthRequest);
+	soap_serialize_PointerTons2__UserDataSession(soap, &this->ns1__OpenUserSessionResponseType::userDataSession);
 #endif
 }
 
-int ns1__AccessAuthenticationRequestType::soap_out(struct soap *soap, const char *tag, int id, const char *type) const
+int ns1__OpenUserSessionResponseType::soap_out(struct soap *soap, const char *tag, int id, const char *type) const
 {
-	return soap_out_ns1__AccessAuthenticationRequestType(soap, tag, id, this, type);
+	return soap_out_ns1__OpenUserSessionResponseType(soap, tag, id, this, type);
 }
 
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__AccessAuthenticationRequestType(struct soap *soap, const char *tag, int id, const ns1__AccessAuthenticationRequestType *a, const char *type)
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__OpenUserSessionResponseType(struct soap *soap, const char *tag, int id, const ns1__OpenUserSessionResponseType *a, const char *type)
 {
 	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__AccessAuthenticationRequestType), type))
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__OpenUserSessionResponseType), type))
 		return soap->error;
-	if (!a->ns1__AccessAuthenticationRequestType::AuthRequest)
-	{	if (soap_element_empty(soap, "AuthRequest"))
+	if (!a->ns1__OpenUserSessionResponseType::userDataSession)
+	{	if (soap_element_empty(soap, "userDataSession"))
 			return soap->error;
 	}
-	else if (soap_out_PointerTons2__AuthenticationType(soap, "AuthRequest", -1, &a->ns1__AccessAuthenticationRequestType::AuthRequest, ""))
+	else if (soap_out_PointerTons2__UserDataSession(soap, "userDataSession", -1, &a->ns1__OpenUserSessionResponseType::userDataSession, ""))
+		return soap->error;
+	if (soap_out_ns2__SessionEnum(soap, "response", -1, &a->ns1__OpenUserSessionResponseType::response, ""))
+		return soap->error;
+	if (soap_out_bool(soap, "success", -1, &a->ns1__OpenUserSessionResponseType::success, ""))
 		return soap->error;
 	return soap_element_end_out(soap, tag);
 }
 
-void *ns1__AccessAuthenticationRequestType::soap_in(struct soap *soap, const char *tag, const char *type)
+void *ns1__OpenUserSessionResponseType::soap_in(struct soap *soap, const char *tag, const char *type)
 {
-	return soap_in_ns1__AccessAuthenticationRequestType(soap, tag, this, type);
+	return soap_in_ns1__OpenUserSessionResponseType(soap, tag, this, type);
 }
 
-SOAP_FMAC3 ns1__AccessAuthenticationRequestType * SOAP_FMAC4 soap_in_ns1__AccessAuthenticationRequestType(struct soap *soap, const char *tag, ns1__AccessAuthenticationRequestType *a, const char *type)
+SOAP_FMAC3 ns1__OpenUserSessionResponseType * SOAP_FMAC4 soap_in_ns1__OpenUserSessionResponseType(struct soap *soap, const char *tag, ns1__OpenUserSessionResponseType *a, const char *type)
 {
 	(void)type; /* appease -Wall -Werror */
 	if (soap_element_begin_in(soap, tag, 0, NULL))
 		return NULL;
-	a = (ns1__AccessAuthenticationRequestType*)soap_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__AccessAuthenticationRequestType, sizeof(ns1__AccessAuthenticationRequestType), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+	a = (ns1__OpenUserSessionResponseType*)soap_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__OpenUserSessionResponseType, sizeof(ns1__OpenUserSessionResponseType), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
 	if (!a)
 		return NULL;
-	if (soap->alloced && soap->alloced != SOAP_TYPE_ns1__AccessAuthenticationRequestType)
+	if (soap->alloced && soap->alloced != SOAP_TYPE_ns1__OpenUserSessionResponseType)
 	{	soap_revert(soap);
 		*soap->id = '\0';
-		return (ns1__AccessAuthenticationRequestType *)a->soap_in(soap, tag, type);
+		return (ns1__OpenUserSessionResponseType *)a->soap_in(soap, tag, type);
 	}
 	if (soap->alloced)
 		a->soap_default(soap);
-	size_t soap_flag_AuthRequest1 = 1;
+	size_t soap_flag_userDataSession1 = 1;
+	size_t soap_flag_response1 = 1;
+	size_t soap_flag_success1 = 1;
 	if (soap->body && *soap->href != '#')
 	{
 		for (;;)
 		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap_flag_AuthRequest1 && soap->error == SOAP_TAG_MISMATCH)
-			{	if (soap_in_PointerTons2__AuthenticationType(soap, "AuthRequest", &a->ns1__AccessAuthenticationRequestType::AuthRequest, "ns2:AuthenticationType"))
-				{	soap_flag_AuthRequest1--;
+			if (soap_flag_userDataSession1 && soap->error == SOAP_TAG_MISMATCH)
+			{	if (soap_in_PointerTons2__UserDataSession(soap, "userDataSession", &a->ns1__OpenUserSessionResponseType::userDataSession, "ns2:UserDataSession"))
+				{	soap_flag_userDataSession1--;
+					continue;
+				}
+			}
+			if (soap_flag_response1 && soap->error == SOAP_TAG_MISMATCH)
+			{	if (soap_in_ns2__SessionEnum(soap, "response", &a->ns1__OpenUserSessionResponseType::response, "ns2:SessionEnum"))
+				{	soap_flag_response1--;
+					continue;
+				}
+			}
+			if (soap_flag_success1 && soap->error == SOAP_TAG_MISMATCH)
+			{	if (soap_in_bool(soap, "success", &a->ns1__OpenUserSessionResponseType::success, "xsd:boolean"))
+				{	soap_flag_success1--;
 					continue;
 				}
 			}
@@ -2045,7 +1483,7 @@ SOAP_FMAC3 ns1__AccessAuthenticationRequestType * SOAP_FMAC4 soap_in_ns1__Access
 		}
 		if (soap_element_end_in(soap, tag))
 			return NULL;
-		if ((soap->mode & SOAP_XML_STRICT) && (!a->ns1__AccessAuthenticationRequestType::AuthRequest))
+		if ((soap->mode & SOAP_XML_STRICT) && (!a->ns1__OpenUserSessionResponseType::userDataSession || soap_flag_response1 > 0 || soap_flag_success1 > 0))
 		{	soap->error = SOAP_OCCURS;
 			return NULL;
 		}
@@ -2055,35 +1493,35 @@ SOAP_FMAC3 ns1__AccessAuthenticationRequestType * SOAP_FMAC4 soap_in_ns1__Access
 		return NULL;
 	}
 	else
-	{	a = (ns1__AccessAuthenticationRequestType *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__AccessAuthenticationRequestType, SOAP_TYPE_ns1__AccessAuthenticationRequestType, sizeof(ns1__AccessAuthenticationRequestType), 0, soap_finsert, soap_fbase);
+	{	a = (ns1__OpenUserSessionResponseType *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__OpenUserSessionResponseType, SOAP_TYPE_ns1__OpenUserSessionResponseType, sizeof(ns1__OpenUserSessionResponseType), 0, soap_finsert, soap_fbase);
 		if (soap->body && soap_element_end_in(soap, tag))
 			return NULL;
 	}
 	return a;
 }
 
-SOAP_FMAC1 ns1__AccessAuthenticationRequestType * SOAP_FMAC2 soap_instantiate_ns1__AccessAuthenticationRequestType(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+SOAP_FMAC1 ns1__OpenUserSessionResponseType * SOAP_FMAC2 soap_instantiate_ns1__OpenUserSessionResponseType(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
 {
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns1__AccessAuthenticationRequestType(%p, %d, %s, %s)\n", (void*)soap, n, type?type:"", arrayType?arrayType:""));
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns1__OpenUserSessionResponseType(%p, %d, %s, %s)\n", (void*)soap, n, type?type:"", arrayType?arrayType:""));
 	(void)type; (void)arrayType; /* appease -Wall -Werror */
-	ns1__AccessAuthenticationRequestType *p;
-	size_t k = sizeof(ns1__AccessAuthenticationRequestType);
-	struct soap_clist *cp = soap_link(soap, SOAP_TYPE_ns1__AccessAuthenticationRequestType, n, soap_fdelete);
+	ns1__OpenUserSessionResponseType *p;
+	size_t k = sizeof(ns1__OpenUserSessionResponseType);
+	struct soap_clist *cp = soap_link(soap, SOAP_TYPE_ns1__OpenUserSessionResponseType, n, soap_fdelete);
 	if (!cp && soap && n != SOAP_NO_LINK_TO_DELETE)
 		return NULL;
 	if (n < 0)
-	{	p = SOAP_NEW(soap, ns1__AccessAuthenticationRequestType);
+	{	p = SOAP_NEW(soap, ns1__OpenUserSessionResponseType);
 		if (p)
 			p->soap = soap;
 	}
 	else
-	{	p = SOAP_NEW_ARRAY(soap, ns1__AccessAuthenticationRequestType, n);
+	{	p = SOAP_NEW_ARRAY(soap, ns1__OpenUserSessionResponseType, n);
 		k *= n;
 		if (p)
 			for (int i = 0; i < n; i++)
 				p[i].soap = soap;
 	}
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated ns1__AccessAuthenticationRequestType location=%p n=%d\n", (void*)p, n));
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated ns1__OpenUserSessionResponseType location=%p n=%d\n", (void*)p, n));
 	if (size)
 		*size = k;
 	if (!p)
@@ -2093,273 +1531,156 @@ SOAP_FMAC1 ns1__AccessAuthenticationRequestType * SOAP_FMAC2 soap_instantiate_ns
 	return p;
 }
 
-int ns1__AccessAuthenticationRequestType::soap_put(struct soap *soap, const char *tag, const  char *type) const
+int ns1__OpenUserSessionResponseType::soap_put(struct soap *soap, const char *tag, const  char *type) const
 {
-	if (soap_out_ns1__AccessAuthenticationRequestType(soap, tag ? tag : "ns1:AccessAuthenticationRequestType", -2, this, type))
+	if (soap_out_ns1__OpenUserSessionResponseType(soap, tag ? tag : "ns1:OpenUserSessionResponseType", -2, this, type))
 		return soap->error;
 	return soap_putindependent(soap);
 }
 
-void *ns1__AccessAuthenticationRequestType::soap_get(struct soap *soap, const char *tag, const char *type)
+void *ns1__OpenUserSessionResponseType::soap_get(struct soap *soap, const char *tag, const char *type)
 {
-	return soap_get_ns1__AccessAuthenticationRequestType(soap, this, tag, type);
+	return soap_get_ns1__OpenUserSessionResponseType(soap, this, tag, type);
 }
 
-SOAP_FMAC3 ns1__AccessAuthenticationRequestType * SOAP_FMAC4 soap_get_ns1__AccessAuthenticationRequestType(struct soap *soap, ns1__AccessAuthenticationRequestType *p, const char *tag, const char *type)
+SOAP_FMAC3 ns1__OpenUserSessionResponseType * SOAP_FMAC4 soap_get_ns1__OpenUserSessionResponseType(struct soap *soap, ns1__OpenUserSessionResponseType *p, const char *tag, const char *type)
 {
-	if ((p = soap_in_ns1__AccessAuthenticationRequestType(soap, tag, p, type)))
+	if ((p = soap_in_ns1__OpenUserSessionResponseType(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;
 }
 
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_xsd__UserDataSession(struct soap *soap, const std::string *a)
-{	(void)soap; (void)a; /* appease -Wall -Werror */
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_xsd__UserDataSession(struct soap *soap, const char *tag, int id, const std::string *s, const char *type)
+void ns1__DataUserSessionType::soap_default(struct soap *soap)
 {
-	if ((soap->mode & SOAP_C_NILSTRING) && s->empty())
-		return soap_element_null(soap, tag, id, type);
-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, s, SOAP_TYPE_xsd__UserDataSession), type) || soap_string_out(soap, s->c_str(), 0) || soap_element_end_out(soap, tag))
-		return soap->error;
-	return SOAP_OK;
+	this->soap = soap;
+	soap_default_std__string(soap, &this->ns1__DataUserSessionType::userName);
+	soap_default_std__string(soap, &this->ns1__DataUserSessionType::passwd);
+	soap_default_std__string(soap, &this->ns1__DataUserSessionType::deviceId);
 }
 
-SOAP_FMAC3 std::string * SOAP_FMAC4 soap_in_xsd__UserDataSession(struct soap *soap, const char *tag, std::string *s, const char *type)
-{
-	(void)type; /* appease -Wall -Werror */
-	if (soap_element_begin_in(soap, tag, 1, NULL))
-		return NULL;
-	if (!s)
-		s = soap_new_std__string(soap, -1);
-	if (soap->null)
-		if (s)
-			s->erase();
-	if (soap->body && *soap->href != '#')
-	{	char *t;
-		s = (std::string*)soap_id_enter(soap, soap->id, s, SOAP_TYPE_xsd__UserDataSession, sizeof(std::string), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
-		if (s)
-		{	if (!(t = soap_string_in(soap, 1, 0, -1, NULL)))
-				return NULL;
-			s->assign(t);
-		}
-	}
-	else
-		s = (std::string*)soap_id_forward(soap, soap->href, soap_id_enter(soap, soap->id, s, SOAP_TYPE_xsd__UserDataSession, sizeof(std::string), soap->type, soap->arrayType, soap_instantiate, soap_fbase), 0, SOAP_TYPE_xsd__UserDataSession, SOAP_TYPE_xsd__UserDataSession, sizeof(std::string), 0, soap_finsert, NULL);
-	if (soap->body && soap_element_end_in(soap, tag))
-		return NULL;
-	return s;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_xsd__UserDataSession(struct soap *soap, const std::string *a, const char *tag, const char *type)
-{
-	if (soap_out_xsd__UserDataSession(soap, tag ? tag : "xsd:UserDataSession", -2, a, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-SOAP_FMAC3 std::string * SOAP_FMAC4 soap_get_xsd__UserDataSession(struct soap *soap, std::string *p, const char *tag, const char *type)
-{
-	if ((p = soap_in_xsd__UserDataSession(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_std__string(struct soap *soap, const std::string *a)
-{	(void)soap; (void)a; /* appease -Wall -Werror */
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_std__string(struct soap *soap, const char *tag, int id, const std::string *s, const char *type)
-{
-	if ((soap->mode & SOAP_C_NILSTRING) && s->empty())
-		return soap_element_null(soap, tag, id, type);
-	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, s, SOAP_TYPE_std__string), type) || soap_string_out(soap, s->c_str(), 0) || soap_element_end_out(soap, tag))
-		return soap->error;
-	return SOAP_OK;
-}
-
-SOAP_FMAC3 std::string * SOAP_FMAC4 soap_in_std__string(struct soap *soap, const char *tag, std::string *s, const char *type)
-{
-	(void)type; /* appease -Wall -Werror */
-	if (soap_element_begin_in(soap, tag, 1, NULL))
-		return NULL;
-	if (!s)
-		s = soap_new_std__string(soap, -1);
-	if (soap->null)
-		if (s)
-			s->erase();
-	if (soap->body && *soap->href != '#')
-	{	char *t;
-		s = (std::string*)soap_id_enter(soap, soap->id, s, SOAP_TYPE_std__string, sizeof(std::string), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
-		if (s)
-		{	if (!(t = soap_string_in(soap, 1, 0, -1, NULL)))
-				return NULL;
-			s->assign(t);
-		}
-	}
-	else
-		s = (std::string*)soap_id_forward(soap, soap->href, soap_id_enter(soap, soap->id, s, SOAP_TYPE_std__string, sizeof(std::string), soap->type, soap->arrayType, soap_instantiate, soap_fbase), 0, SOAP_TYPE_std__string, SOAP_TYPE_std__string, sizeof(std::string), 0, soap_finsert, NULL);
-	if (soap->body && soap_element_end_in(soap, tag))
-		return NULL;
-	return s;
-}
-
-SOAP_FMAC1 std::string * SOAP_FMAC2 soap_instantiate_std__string(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
-{
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_std__string(%p, %d, %s, %s)\n", (void*)soap, n, type?type:"", arrayType?arrayType:""));
-	(void)type; (void)arrayType; /* appease -Wall -Werror */
-	std::string *p;
-	size_t k = sizeof(std::string);
-	struct soap_clist *cp = soap_link(soap, SOAP_TYPE_std__string, n, soap_fdelete);
-	if (!cp && soap && n != SOAP_NO_LINK_TO_DELETE)
-		return NULL;
-	if (n < 0)
-	{	p = SOAP_NEW(soap, std::string);
-	}
-	else
-	{	p = SOAP_NEW_ARRAY(soap, std::string, n);
-		k *= n;
-	}
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated std::string location=%p n=%d\n", (void*)p, n));
-	if (size)
-		*size = k;
-	if (!p)
-		soap->error = SOAP_EOM;
-	else if (cp)
-		cp->ptr = (void*)p;
-	return p;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_std__string(struct soap *soap, const std::string *a, const char *tag, const char *type)
-{
-	if (soap_out_std__string(soap, tag ? tag : "string", -2, a, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-SOAP_FMAC3 std::string * SOAP_FMAC4 soap_get_std__string(struct soap *soap, std::string *p, const char *tag, const char *type)
-{
-	if ((p = soap_in_std__string(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-void xsd__base64Binary::soap_default(struct soap *soap)
-{
-	(void)soap; /* appease -Wall -Werror */
-	this->__ptr = NULL;
-	this->__size = 0;
-	this->id = NULL;
-	this->type = NULL;
-	this->options = NULL;
-}
-
-void xsd__base64Binary::soap_serialize(struct soap *soap) const
+void ns1__DataUserSessionType::soap_serialize(struct soap *soap) const
 {
 	(void)soap; /* appease -Wall -Werror */
 #ifndef WITH_NOIDREF
-	if (this->__ptr)
-		(void)soap_attachment_reference(soap, this, this->__ptr, this->__size, SOAP_TYPE_xsd__base64Binary, this->id, this->type);
+	soap_serialize_std__string(soap, &this->ns1__DataUserSessionType::userName);
+	soap_serialize_std__string(soap, &this->ns1__DataUserSessionType::passwd);
+	soap_serialize_std__string(soap, &this->ns1__DataUserSessionType::deviceId);
 #endif
 }
 
-SOAP_FMAC3S const char* SOAP_FMAC4S soap_xsd__base64Binary2s(struct soap *soap, xsd__base64Binary a)
+int ns1__DataUserSessionType::soap_out(struct soap *soap, const char *tag, int id, const char *type) const
 {
-	return soap_s2base64(soap, a.__ptr, NULL, a.__size);
+	return soap_out_ns1__DataUserSessionType(soap, tag, id, this, type);
 }
 
-int xsd__base64Binary::soap_out(struct soap *soap, const char *tag, int id, const char *type) const
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_ns1__DataUserSessionType(struct soap *soap, const char *tag, int id, const ns1__DataUserSessionType *a, const char *type)
 {
-	return soap_out_xsd__base64Binary(soap, tag, id, this, type);
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_xsd__base64Binary(struct soap *soap, const char *tag, int id, const xsd__base64Binary *a, const char *type)
-{
-#ifndef WITH_LEANER
-	id = soap_attachment(soap, tag, id, a, a->__ptr, a->__size, a->id, a->type, a->options, type, SOAP_TYPE_xsd__base64Binary);
-#else
-	id = soap_element_id(soap, tag, id, a, a->__ptr, a->__size, type, SOAP_TYPE_xsd__base64Binary, NULL);
-#endif
-	if (id < 0)
+	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_out(soap, tag, soap_embedded_id(soap, id, a, SOAP_TYPE_ns1__DataUserSessionType), type))
 		return soap->error;
-	if (soap_element_begin_out(soap, tag, id, type))
+	if (soap_out_std__string(soap, "userName", -1, &a->ns1__DataUserSessionType::userName, ""))
 		return soap->error;
-	if (soap_putbase64(soap, a->__ptr, a->__size))
+	if (soap_out_std__string(soap, "passwd", -1, &a->ns1__DataUserSessionType::passwd, ""))
+		return soap->error;
+	if (soap_out_std__string(soap, "deviceId", -1, &a->ns1__DataUserSessionType::deviceId, ""))
 		return soap->error;
 	return soap_element_end_out(soap, tag);
 }
 
-SOAP_FMAC3S int SOAP_FMAC4S soap_s2xsd__base64Binary(struct soap *soap, const char *s, xsd__base64Binary *a)
+void *ns1__DataUserSessionType::soap_in(struct soap *soap, const char *tag, const char *type)
 {
-	a->__ptr = (unsigned char*)soap_base642s(soap, s, NULL, 0, &a->__size);
-	if (!a->__ptr)
-		return soap->error;
-	return SOAP_OK;
+	return soap_in_ns1__DataUserSessionType(soap, tag, this, type);
 }
 
-void *xsd__base64Binary::soap_in(struct soap *soap, const char *tag, const char *type)
+SOAP_FMAC3 ns1__DataUserSessionType * SOAP_FMAC4 soap_in_ns1__DataUserSessionType(struct soap *soap, const char *tag, ns1__DataUserSessionType *a, const char *type)
 {
-	return soap_in_xsd__base64Binary(soap, tag, this, type);
-}
-
-SOAP_FMAC3 xsd__base64Binary * SOAP_FMAC4 soap_in_xsd__base64Binary(struct soap *soap, const char *tag, xsd__base64Binary *a, const char *type)
-{
-	if (soap_element_begin_in(soap, tag, 1, NULL))
+	(void)type; /* appease -Wall -Werror */
+	if (soap_element_begin_in(soap, tag, 0, NULL))
 		return NULL;
-	if (*soap->type && soap_match_tag(soap, soap->type, type) && soap_match_tag(soap, soap->type, ":base64Binary") && soap_match_tag(soap, soap->type, ":base64"))
-	{	soap->error = SOAP_TYPE;
-		return NULL;
-	}
-	a = (xsd__base64Binary*)soap_id_enter(soap, soap->id, a, SOAP_TYPE_xsd__base64Binary, sizeof(xsd__base64Binary), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
+	a = (ns1__DataUserSessionType*)soap_id_enter(soap, soap->id, a, SOAP_TYPE_ns1__DataUserSessionType, sizeof(ns1__DataUserSessionType), soap->type, soap->arrayType, soap_instantiate, soap_fbase);
 	if (!a)
 		return NULL;
-	a->soap_default(soap);
-	if (soap->body && !*soap->href)
-	{
-		a->__ptr = soap_getbase64(soap, &a->__size, 0);
-#ifndef WITH_LEANER
-		if (soap_xop_forward(soap, &a->__ptr, &a->__size, &a->id, &a->type, &a->options))
-			return NULL;
-#endif
-		if ((!a->__ptr && soap->error) || soap_element_end_in(soap, tag))
-			return NULL;
+	if (soap->alloced && soap->alloced != SOAP_TYPE_ns1__DataUserSessionType)
+	{	soap_revert(soap);
+		*soap->id = '\0';
+		return (ns1__DataUserSessionType *)a->soap_in(soap, tag, type);
 	}
-	else
-	{	
-#ifndef WITH_LEANER
-		if (*soap->href != '#')
-		{	if (soap_attachment_forward(soap, &a->__ptr, &a->__size, &a->id, &a->type, &a->options))
+	if (soap->alloced)
+		a->soap_default(soap);
+	size_t soap_flag_userName1 = 1;
+	size_t soap_flag_passwd1 = 1;
+	size_t soap_flag_deviceId1 = 1;
+	if (soap->body && *soap->href != '#')
+	{
+		for (;;)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_userName1 && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+			{	if (soap_in_std__string(soap, "userName", &a->ns1__DataUserSessionType::userName, "xsd:string"))
+				{	soap_flag_userName1--;
+					continue;
+				}
+			}
+			if (soap_flag_passwd1 && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+			{	if (soap_in_std__string(soap, "passwd", &a->ns1__DataUserSessionType::passwd, "xsd:string"))
+				{	soap_flag_passwd1--;
+					continue;
+				}
+			}
+			if (soap_flag_deviceId1 && (soap->error == SOAP_TAG_MISMATCH || soap->error == SOAP_NO_TAG))
+			{	if (soap_in_std__string(soap, "deviceId", &a->ns1__DataUserSessionType::deviceId, "xsd:string"))
+				{	soap_flag_deviceId1--;
+					continue;
+				}
+			}
+			if (soap->error == SOAP_TAG_MISMATCH)
+				soap->error = soap_ignore_element(soap);
+			if (soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
 				return NULL;
 		}
-		else
-#endif
-			a = (xsd__base64Binary *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_xsd__base64Binary, SOAP_TYPE_xsd__base64Binary, sizeof(xsd__base64Binary), 0, soap_finsert, soap_fbase);
+		if (soap_element_end_in(soap, tag))
+			return NULL;
+		if ((soap->mode & SOAP_XML_STRICT) && (soap_flag_userName1 > 0 || soap_flag_passwd1 > 0 || soap_flag_deviceId1 > 0))
+		{	soap->error = SOAP_OCCURS;
+			return NULL;
+		}
+	}
+	else if ((soap->mode & SOAP_XML_STRICT) && *soap->href != '#')
+	{	soap->error = SOAP_OCCURS;
+		return NULL;
+	}
+	else
+	{	a = (ns1__DataUserSessionType *)soap_id_forward(soap, soap->href, (void*)a, 0, SOAP_TYPE_ns1__DataUserSessionType, SOAP_TYPE_ns1__DataUserSessionType, sizeof(ns1__DataUserSessionType), 0, soap_finsert, soap_fbase);
 		if (soap->body && soap_element_end_in(soap, tag))
 			return NULL;
 	}
 	return a;
 }
 
-SOAP_FMAC1 xsd__base64Binary * SOAP_FMAC2 soap_instantiate_xsd__base64Binary(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+SOAP_FMAC1 ns1__DataUserSessionType * SOAP_FMAC2 soap_instantiate_ns1__DataUserSessionType(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
 {
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_xsd__base64Binary(%p, %d, %s, %s)\n", (void*)soap, n, type?type:"", arrayType?arrayType:""));
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate_ns1__DataUserSessionType(%p, %d, %s, %s)\n", (void*)soap, n, type?type:"", arrayType?arrayType:""));
 	(void)type; (void)arrayType; /* appease -Wall -Werror */
-	xsd__base64Binary *p;
-	size_t k = sizeof(xsd__base64Binary);
-	struct soap_clist *cp = soap_link(soap, SOAP_TYPE_xsd__base64Binary, n, soap_fdelete);
+	ns1__DataUserSessionType *p;
+	size_t k = sizeof(ns1__DataUserSessionType);
+	struct soap_clist *cp = soap_link(soap, SOAP_TYPE_ns1__DataUserSessionType, n, soap_fdelete);
 	if (!cp && soap && n != SOAP_NO_LINK_TO_DELETE)
 		return NULL;
 	if (n < 0)
-	{	p = SOAP_NEW(soap, xsd__base64Binary);
+	{	p = SOAP_NEW(soap, ns1__DataUserSessionType);
+		if (p)
+			p->soap = soap;
 	}
 	else
-	{	p = SOAP_NEW_ARRAY(soap, xsd__base64Binary, n);
+	{	p = SOAP_NEW_ARRAY(soap, ns1__DataUserSessionType, n);
 		k *= n;
+		if (p)
+			for (int i = 0; i < n; i++)
+				p[i].soap = soap;
 	}
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated xsd__base64Binary location=%p n=%d\n", (void*)p, n));
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated ns1__DataUserSessionType location=%p n=%d\n", (void*)p, n));
 	if (size)
 		*size = k;
 	if (!p)
@@ -2369,21 +1690,21 @@ SOAP_FMAC1 xsd__base64Binary * SOAP_FMAC2 soap_instantiate_xsd__base64Binary(str
 	return p;
 }
 
-int xsd__base64Binary::soap_put(struct soap *soap, const char *tag, const  char *type) const
+int ns1__DataUserSessionType::soap_put(struct soap *soap, const char *tag, const  char *type) const
 {
-	if (soap_out_xsd__base64Binary(soap, tag ? tag : "xsd:base64Binary", -2, this, type))
+	if (soap_out_ns1__DataUserSessionType(soap, tag ? tag : "ns1:DataUserSessionType", -2, this, type))
 		return soap->error;
 	return soap_putindependent(soap);
 }
 
-void *xsd__base64Binary::soap_get(struct soap *soap, const char *tag, const char *type)
+void *ns1__DataUserSessionType::soap_get(struct soap *soap, const char *tag, const char *type)
 {
-	return soap_get_xsd__base64Binary(soap, this, tag, type);
+	return soap_get_ns1__DataUserSessionType(soap, this, tag, type);
 }
 
-SOAP_FMAC3 xsd__base64Binary * SOAP_FMAC4 soap_get_xsd__base64Binary(struct soap *soap, xsd__base64Binary *p, const char *tag, const char *type)
+SOAP_FMAC3 ns1__DataUserSessionType * SOAP_FMAC4 soap_get_ns1__DataUserSessionType(struct soap *soap, ns1__DataUserSessionType *p, const char *tag, const char *type)
 {
-	if ((p = soap_in_xsd__base64Binary(soap, tag, p, type)))
+	if ((p = soap_in_ns1__DataUserSessionType(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;
@@ -3029,31 +2350,123 @@ SOAP_FMAC3 struct SOAP_ENV__Header * SOAP_FMAC4 soap_get_SOAP_ENV__Header(struct
 
 #endif
 
+SOAP_FMAC3 void SOAP_FMAC4 soap_default___ns1__CloseUserSession(struct soap *soap, struct __ns1__CloseUserSession *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+	a->ns1__DataUserSessionRequest = NULL;
+}
+
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___ns1__CloseUserSession(struct soap *soap, const struct __ns1__CloseUserSession *a)
+{
+	(void)soap; (void)a; /* appease -Wall -Werror */
+#ifndef WITH_NOIDREF
+	soap_serialize_PointerTons1__DataUserSessionType(soap, &a->ns1__DataUserSessionRequest);
+#endif
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_out___ns1__CloseUserSession(struct soap *soap, const char *tag, int id, const struct __ns1__CloseUserSession *a, const char *type)
+{
+	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
+	if (soap_out_PointerTons1__DataUserSessionType(soap, "ns1:DataUserSessionRequest", -1, &a->ns1__DataUserSessionRequest, ""))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __ns1__CloseUserSession * SOAP_FMAC4 soap_in___ns1__CloseUserSession(struct soap *soap, const char *tag, struct __ns1__CloseUserSession *a, const char *type)
+{
+	size_t soap_flag_ns1__DataUserSessionRequest = 1;
+	short soap_flag;
+	(void)tag; (void)type; /* appease -Wall -Werror */
+	a = (struct __ns1__CloseUserSession*)soap_id_enter(soap, "", a, SOAP_TYPE___ns1__CloseUserSession, sizeof(struct __ns1__CloseUserSession), NULL, NULL, NULL, NULL);
+	if (!a)
+		return NULL;
+	soap_default___ns1__CloseUserSession(soap, a);
+		for (soap_flag = 0;; soap_flag = 1)
+		{	soap->error = SOAP_TAG_MISMATCH;
+			if (soap_flag_ns1__DataUserSessionRequest && soap->error == SOAP_TAG_MISMATCH)
+			{	if (soap_in_PointerTons1__DataUserSessionType(soap, "ns1:DataUserSessionRequest", &a->ns1__DataUserSessionRequest, "ns1:DataUserSessionType"))
+				{	soap_flag_ns1__DataUserSessionRequest--;
+					continue;
+				}
+			}
+			if (soap->error == SOAP_TAG_MISMATCH && soap_flag)
+			{	soap->error = SOAP_OK;
+				break;
+			}
+			if (soap_flag && soap->error == SOAP_NO_TAG)
+				break;
+			if (soap->error)
+				return NULL;
+		}
+	return a;
+}
+
+SOAP_FMAC1 struct __ns1__CloseUserSession * SOAP_FMAC2 soap_instantiate___ns1__CloseUserSession(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
+{
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate___ns1__CloseUserSession(%p, %d, %s, %s)\n", (void*)soap, n, type?type:"", arrayType?arrayType:""));
+	(void)type; (void)arrayType; /* appease -Wall -Werror */
+	struct __ns1__CloseUserSession *p;
+	size_t k = sizeof(struct __ns1__CloseUserSession);
+	struct soap_clist *cp = soap_link(soap, SOAP_TYPE___ns1__CloseUserSession, n, soap_fdelete);
+	if (!cp && soap && n != SOAP_NO_LINK_TO_DELETE)
+		return NULL;
+	if (n < 0)
+	{	p = SOAP_NEW(soap, struct __ns1__CloseUserSession);
+	}
+	else
+	{	p = SOAP_NEW_ARRAY(soap, struct __ns1__CloseUserSession, n);
+		k *= n;
+	}
+	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated struct __ns1__CloseUserSession location=%p n=%d\n", (void*)p, n));
+	if (size)
+		*size = k;
+	if (!p)
+		soap->error = SOAP_EOM;
+	else if (cp)
+		cp->ptr = (void*)p;
+	return p;
+}
+
+SOAP_FMAC3 int SOAP_FMAC4 soap_put___ns1__CloseUserSession(struct soap *soap, const struct __ns1__CloseUserSession *a, const char *tag, const char *type)
+{
+	if (soap_out___ns1__CloseUserSession(soap, tag ? tag : "-ns1:CloseUserSession", -2, a, type))
+		return soap->error;
+	return SOAP_OK;
+}
+
+SOAP_FMAC3 struct __ns1__CloseUserSession * SOAP_FMAC4 soap_get___ns1__CloseUserSession(struct soap *soap, struct __ns1__CloseUserSession *p, const char *tag, const char *type)
+{
+	if ((p = soap_in___ns1__CloseUserSession(soap, tag, p, type)))
+		if (soap_getindependent(soap))
+			return NULL;
+	return p;
+}
+
 SOAP_FMAC3 void SOAP_FMAC4 soap_default___ns1__OpenUserSession(struct soap *soap, struct __ns1__OpenUserSession *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
-	a->ns1__OpenUserSessionRequest_ = NULL;
+	a->ns1__DataUserSessionRequest = NULL;
 }
 
 SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___ns1__OpenUserSession(struct soap *soap, const struct __ns1__OpenUserSession *a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
 #ifndef WITH_NOIDREF
-	soap_serialize_PointerTons1__OpenUserSessionRequest(soap, &a->ns1__OpenUserSessionRequest_);
+	soap_serialize_PointerTons1__DataUserSessionType(soap, &a->ns1__DataUserSessionRequest);
 #endif
 }
 
 SOAP_FMAC3 int SOAP_FMAC4 soap_out___ns1__OpenUserSession(struct soap *soap, const char *tag, int id, const struct __ns1__OpenUserSession *a, const char *type)
 {
 	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
-	if (soap_out_PointerTons1__OpenUserSessionRequest(soap, "ns1:OpenUserSessionRequest", -1, &a->ns1__OpenUserSessionRequest_, ""))
+	if (soap_out_PointerTons1__DataUserSessionType(soap, "ns1:DataUserSessionRequest", -1, &a->ns1__DataUserSessionRequest, ""))
 		return soap->error;
 	return SOAP_OK;
 }
 
 SOAP_FMAC3 struct __ns1__OpenUserSession * SOAP_FMAC4 soap_in___ns1__OpenUserSession(struct soap *soap, const char *tag, struct __ns1__OpenUserSession *a, const char *type)
 {
-	size_t soap_flag_ns1__OpenUserSessionRequest_ = 1;
+	size_t soap_flag_ns1__DataUserSessionRequest = 1;
 	short soap_flag;
 	(void)tag; (void)type; /* appease -Wall -Werror */
 	a = (struct __ns1__OpenUserSession*)soap_id_enter(soap, "", a, SOAP_TYPE___ns1__OpenUserSession, sizeof(struct __ns1__OpenUserSession), NULL, NULL, NULL, NULL);
@@ -3062,9 +2475,9 @@ SOAP_FMAC3 struct __ns1__OpenUserSession * SOAP_FMAC4 soap_in___ns1__OpenUserSes
 	soap_default___ns1__OpenUserSession(soap, a);
 		for (soap_flag = 0;; soap_flag = 1)
 		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap_flag_ns1__OpenUserSessionRequest_ && soap->error == SOAP_TAG_MISMATCH)
-			{	if (soap_in_PointerTons1__OpenUserSessionRequest(soap, "ns1:OpenUserSessionRequest", &a->ns1__OpenUserSessionRequest_, "ns1:OpenUserSessionRequest"))
-				{	soap_flag_ns1__OpenUserSessionRequest_--;
+			if (soap_flag_ns1__DataUserSessionRequest && soap->error == SOAP_TAG_MISMATCH)
+			{	if (soap_in_PointerTons1__DataUserSessionType(soap, "ns1:DataUserSessionRequest", &a->ns1__DataUserSessionRequest, "ns1:DataUserSessionType"))
+				{	soap_flag_ns1__DataUserSessionRequest--;
 					continue;
 				}
 			}
@@ -3116,98 +2529,6 @@ SOAP_FMAC3 int SOAP_FMAC4 soap_put___ns1__OpenUserSession(struct soap *soap, con
 SOAP_FMAC3 struct __ns1__OpenUserSession * SOAP_FMAC4 soap_get___ns1__OpenUserSession(struct soap *soap, struct __ns1__OpenUserSession *p, const char *tag, const char *type)
 {
 	if ((p = soap_in___ns1__OpenUserSession(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_default___ns1__AccessAuthentication(struct soap *soap, struct __ns1__AccessAuthentication *a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-	a->ns1__AccessAuthenticationRequest = NULL;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize___ns1__AccessAuthentication(struct soap *soap, const struct __ns1__AccessAuthentication *a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-#ifndef WITH_NOIDREF
-	soap_serialize_PointerTons1__AccessAuthenticationRequestType(soap, &a->ns1__AccessAuthenticationRequest);
-#endif
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out___ns1__AccessAuthentication(struct soap *soap, const char *tag, int id, const struct __ns1__AccessAuthentication *a, const char *type)
-{
-	(void)soap; (void)tag; (void)id; (void)a; (void)type; /* appease -Wall -Werror */
-	if (soap_out_PointerTons1__AccessAuthenticationRequestType(soap, "ns1:AccessAuthenticationRequest", -1, &a->ns1__AccessAuthenticationRequest, ""))
-		return soap->error;
-	return SOAP_OK;
-}
-
-SOAP_FMAC3 struct __ns1__AccessAuthentication * SOAP_FMAC4 soap_in___ns1__AccessAuthentication(struct soap *soap, const char *tag, struct __ns1__AccessAuthentication *a, const char *type)
-{
-	size_t soap_flag_ns1__AccessAuthenticationRequest = 1;
-	short soap_flag;
-	(void)tag; (void)type; /* appease -Wall -Werror */
-	a = (struct __ns1__AccessAuthentication*)soap_id_enter(soap, "", a, SOAP_TYPE___ns1__AccessAuthentication, sizeof(struct __ns1__AccessAuthentication), NULL, NULL, NULL, NULL);
-	if (!a)
-		return NULL;
-	soap_default___ns1__AccessAuthentication(soap, a);
-		for (soap_flag = 0;; soap_flag = 1)
-		{	soap->error = SOAP_TAG_MISMATCH;
-			if (soap_flag_ns1__AccessAuthenticationRequest && soap->error == SOAP_TAG_MISMATCH)
-			{	if (soap_in_PointerTons1__AccessAuthenticationRequestType(soap, "ns1:AccessAuthenticationRequest", &a->ns1__AccessAuthenticationRequest, "ns1:AccessAuthenticationRequestType"))
-				{	soap_flag_ns1__AccessAuthenticationRequest--;
-					continue;
-				}
-			}
-			if (soap->error == SOAP_TAG_MISMATCH && soap_flag)
-			{	soap->error = SOAP_OK;
-				break;
-			}
-			if (soap_flag && soap->error == SOAP_NO_TAG)
-				break;
-			if (soap->error)
-				return NULL;
-		}
-	return a;
-}
-
-SOAP_FMAC1 struct __ns1__AccessAuthentication * SOAP_FMAC2 soap_instantiate___ns1__AccessAuthentication(struct soap *soap, int n, const char *type, const char *arrayType, size_t *size)
-{
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "soap_instantiate___ns1__AccessAuthentication(%p, %d, %s, %s)\n", (void*)soap, n, type?type:"", arrayType?arrayType:""));
-	(void)type; (void)arrayType; /* appease -Wall -Werror */
-	struct __ns1__AccessAuthentication *p;
-	size_t k = sizeof(struct __ns1__AccessAuthentication);
-	struct soap_clist *cp = soap_link(soap, SOAP_TYPE___ns1__AccessAuthentication, n, soap_fdelete);
-	if (!cp && soap && n != SOAP_NO_LINK_TO_DELETE)
-		return NULL;
-	if (n < 0)
-	{	p = SOAP_NEW(soap, struct __ns1__AccessAuthentication);
-	}
-	else
-	{	p = SOAP_NEW_ARRAY(soap, struct __ns1__AccessAuthentication, n);
-		k *= n;
-	}
-	DBGLOG(TEST, SOAP_MESSAGE(fdebug, "Instantiated struct __ns1__AccessAuthentication location=%p n=%d\n", (void*)p, n));
-	if (size)
-		*size = k;
-	if (!p)
-		soap->error = SOAP_EOM;
-	else if (cp)
-		cp->ptr = (void*)p;
-	return p;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put___ns1__AccessAuthentication(struct soap *soap, const struct __ns1__AccessAuthentication *a, const char *tag, const char *type)
-{
-	if (soap_out___ns1__AccessAuthentication(soap, tag ? tag : "-ns1:AccessAuthentication", -2, a, type))
-		return soap->error;
-	return SOAP_OK;
-}
-
-SOAP_FMAC3 struct __ns1__AccessAuthentication * SOAP_FMAC4 soap_get___ns1__AccessAuthentication(struct soap *soap, struct __ns1__AccessAuthentication *p, const char *tag, const char *type)
-{
-	if ((p = soap_in___ns1__AccessAuthentication(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;
@@ -3390,35 +2711,35 @@ SOAP_FMAC3 struct SOAP_ENV__Code ** SOAP_FMAC4 soap_get_PointerToSOAP_ENV__Code(
 
 #endif
 
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTons1__OpenUserSessionRequest(struct soap *soap, ns1__OpenUserSessionRequest *const*a)
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTons1__DataUserSessionType(struct soap *soap, ns1__DataUserSessionType *const*a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
 #ifndef WITH_NOIDREF
-	if (!soap_reference(soap, *a, SOAP_TYPE_ns1__OpenUserSessionRequest))
+	if (!soap_reference(soap, *a, SOAP_TYPE_ns1__DataUserSessionType))
 		(*a)->soap_serialize(soap);
 #endif
 }
 
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTons1__OpenUserSessionRequest(struct soap *soap, const char *tag, int id, ns1__OpenUserSessionRequest *const*a, const char *type)
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTons1__DataUserSessionType(struct soap *soap, const char *tag, int id, ns1__DataUserSessionType *const*a, const char *type)
 {
-	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_ns1__OpenUserSessionRequest, NULL);
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_ns1__DataUserSessionType, NULL);
 	if (id < 0)
 		return soap->error;
-	return (*a)->soap_out(soap, tag, id, (*a)->soap_type() == SOAP_TYPE_ns1__OpenUserSessionRequest ? type : NULL);
+	return (*a)->soap_out(soap, tag, id, (*a)->soap_type() == SOAP_TYPE_ns1__DataUserSessionType ? type : NULL);
 }
 
-SOAP_FMAC3 ns1__OpenUserSessionRequest ** SOAP_FMAC4 soap_in_PointerTons1__OpenUserSessionRequest(struct soap *soap, const char *tag, ns1__OpenUserSessionRequest **a, const char *type)
+SOAP_FMAC3 ns1__DataUserSessionType ** SOAP_FMAC4 soap_in_PointerTons1__DataUserSessionType(struct soap *soap, const char *tag, ns1__DataUserSessionType **a, const char *type)
 {
 	(void)type; /* appease -Wall -Werror */
 	if (soap_element_begin_in(soap, tag, 1, NULL))
 		return NULL;
 	if (!a)
-		if (!(a = (ns1__OpenUserSessionRequest **)soap_malloc(soap, sizeof(ns1__OpenUserSessionRequest *))))
+		if (!(a = (ns1__DataUserSessionType **)soap_malloc(soap, sizeof(ns1__DataUserSessionType *))))
 			return NULL;
 	*a = NULL;
 	if (!soap->null && *soap->href != '#')
 	{	soap_revert(soap);
-		if (!(*a = (ns1__OpenUserSessionRequest *)soap_instantiate_ns1__OpenUserSessionRequest(soap, -1, soap->type, soap->arrayType, NULL)))
+		if (!(*a = (ns1__DataUserSessionType *)soap_instantiate_ns1__DataUserSessionType(soap, -1, soap->type, soap->arrayType, NULL)))
 			return NULL;
 		(*a)->soap_default(soap);
 		if (!(*a)->soap_in(soap, tag, NULL))
@@ -3427,57 +2748,57 @@ SOAP_FMAC3 ns1__OpenUserSessionRequest ** SOAP_FMAC4 soap_in_PointerTons1__OpenU
 		}
 	}
 	else
-	{	a = (ns1__OpenUserSessionRequest **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_ns1__OpenUserSessionRequest, sizeof(ns1__OpenUserSessionRequest), 0, soap_fbase);
+	{	a = (ns1__DataUserSessionType **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_ns1__DataUserSessionType, sizeof(ns1__DataUserSessionType), 0, soap_fbase);
 		if (soap->body && soap_element_end_in(soap, tag))
 			return NULL;
 	}
 	return a;
 }
 
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTons1__OpenUserSessionRequest(struct soap *soap, ns1__OpenUserSessionRequest *const*a, const char *tag, const char *type)
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTons1__DataUserSessionType(struct soap *soap, ns1__DataUserSessionType *const*a, const char *tag, const char *type)
 {
-	if (soap_out_PointerTons1__OpenUserSessionRequest(soap, tag ? tag : "ns1:OpenUserSessionRequest", -2, a, type))
+	if (soap_out_PointerTons1__DataUserSessionType(soap, tag ? tag : "ns1:DataUserSessionType", -2, a, type))
 		return soap->error;
 	return soap_putindependent(soap);
 }
 
-SOAP_FMAC3 ns1__OpenUserSessionRequest ** SOAP_FMAC4 soap_get_PointerTons1__OpenUserSessionRequest(struct soap *soap, ns1__OpenUserSessionRequest **p, const char *tag, const char *type)
+SOAP_FMAC3 ns1__DataUserSessionType ** SOAP_FMAC4 soap_get_PointerTons1__DataUserSessionType(struct soap *soap, ns1__DataUserSessionType **p, const char *tag, const char *type)
 {
-	if ((p = soap_in_PointerTons1__OpenUserSessionRequest(soap, tag, p, type)))
+	if ((p = soap_in_PointerTons1__DataUserSessionType(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;
 }
 
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTons1__AccessAuthenticationRequestType(struct soap *soap, ns1__AccessAuthenticationRequestType *const*a)
+SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTons2__UserDataSession(struct soap *soap, ns2__UserDataSession *const*a)
 {
 	(void)soap; (void)a; /* appease -Wall -Werror */
 #ifndef WITH_NOIDREF
-	if (!soap_reference(soap, *a, SOAP_TYPE_ns1__AccessAuthenticationRequestType))
+	if (!soap_reference(soap, *a, SOAP_TYPE_ns2__UserDataSession))
 		(*a)->soap_serialize(soap);
 #endif
 }
 
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTons1__AccessAuthenticationRequestType(struct soap *soap, const char *tag, int id, ns1__AccessAuthenticationRequestType *const*a, const char *type)
+SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTons2__UserDataSession(struct soap *soap, const char *tag, int id, ns2__UserDataSession *const*a, const char *type)
 {
-	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_ns1__AccessAuthenticationRequestType, NULL);
+	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_ns2__UserDataSession, NULL);
 	if (id < 0)
 		return soap->error;
-	return (*a)->soap_out(soap, tag, id, (*a)->soap_type() == SOAP_TYPE_ns1__AccessAuthenticationRequestType ? type : NULL);
+	return (*a)->soap_out(soap, tag, id, (*a)->soap_type() == SOAP_TYPE_ns2__UserDataSession ? type : NULL);
 }
 
-SOAP_FMAC3 ns1__AccessAuthenticationRequestType ** SOAP_FMAC4 soap_in_PointerTons1__AccessAuthenticationRequestType(struct soap *soap, const char *tag, ns1__AccessAuthenticationRequestType **a, const char *type)
+SOAP_FMAC3 ns2__UserDataSession ** SOAP_FMAC4 soap_in_PointerTons2__UserDataSession(struct soap *soap, const char *tag, ns2__UserDataSession **a, const char *type)
 {
 	(void)type; /* appease -Wall -Werror */
 	if (soap_element_begin_in(soap, tag, 1, NULL))
 		return NULL;
 	if (!a)
-		if (!(a = (ns1__AccessAuthenticationRequestType **)soap_malloc(soap, sizeof(ns1__AccessAuthenticationRequestType *))))
+		if (!(a = (ns2__UserDataSession **)soap_malloc(soap, sizeof(ns2__UserDataSession *))))
 			return NULL;
 	*a = NULL;
 	if (!soap->null && *soap->href != '#')
 	{	soap_revert(soap);
-		if (!(*a = (ns1__AccessAuthenticationRequestType *)soap_instantiate_ns1__AccessAuthenticationRequestType(soap, -1, soap->type, soap->arrayType, NULL)))
+		if (!(*a = (ns2__UserDataSession *)soap_instantiate_ns2__UserDataSession(soap, -1, soap->type, soap->arrayType, NULL)))
 			return NULL;
 		(*a)->soap_default(soap);
 		if (!(*a)->soap_in(soap, tag, NULL))
@@ -3486,135 +2807,23 @@ SOAP_FMAC3 ns1__AccessAuthenticationRequestType ** SOAP_FMAC4 soap_in_PointerTon
 		}
 	}
 	else
-	{	a = (ns1__AccessAuthenticationRequestType **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_ns1__AccessAuthenticationRequestType, sizeof(ns1__AccessAuthenticationRequestType), 0, soap_fbase);
+	{	a = (ns2__UserDataSession **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_ns2__UserDataSession, sizeof(ns2__UserDataSession), 0, soap_fbase);
 		if (soap->body && soap_element_end_in(soap, tag))
 			return NULL;
 	}
 	return a;
 }
 
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTons1__AccessAuthenticationRequestType(struct soap *soap, ns1__AccessAuthenticationRequestType *const*a, const char *tag, const char *type)
+SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTons2__UserDataSession(struct soap *soap, ns2__UserDataSession *const*a, const char *tag, const char *type)
 {
-	if (soap_out_PointerTons1__AccessAuthenticationRequestType(soap, tag ? tag : "ns1:AccessAuthenticationRequestType", -2, a, type))
+	if (soap_out_PointerTons2__UserDataSession(soap, tag ? tag : "ns2:UserDataSession", -2, a, type))
 		return soap->error;
 	return soap_putindependent(soap);
 }
 
-SOAP_FMAC3 ns1__AccessAuthenticationRequestType ** SOAP_FMAC4 soap_get_PointerTons1__AccessAuthenticationRequestType(struct soap *soap, ns1__AccessAuthenticationRequestType **p, const char *tag, const char *type)
+SOAP_FMAC3 ns2__UserDataSession ** SOAP_FMAC4 soap_get_PointerTons2__UserDataSession(struct soap *soap, ns2__UserDataSession **p, const char *tag, const char *type)
 {
-	if ((p = soap_in_PointerTons1__AccessAuthenticationRequestType(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTons2__AuthenticationType(struct soap *soap, ns2__AuthenticationType *const*a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-#ifndef WITH_NOIDREF
-	if (!soap_reference(soap, *a, SOAP_TYPE_ns2__AuthenticationType))
-		(*a)->soap_serialize(soap);
-#endif
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTons2__AuthenticationType(struct soap *soap, const char *tag, int id, ns2__AuthenticationType *const*a, const char *type)
-{
-	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_ns2__AuthenticationType, NULL);
-	if (id < 0)
-		return soap->error;
-	return (*a)->soap_out(soap, tag, id, (*a)->soap_type() == SOAP_TYPE_ns2__AuthenticationType ? type : NULL);
-}
-
-SOAP_FMAC3 ns2__AuthenticationType ** SOAP_FMAC4 soap_in_PointerTons2__AuthenticationType(struct soap *soap, const char *tag, ns2__AuthenticationType **a, const char *type)
-{
-	(void)type; /* appease -Wall -Werror */
-	if (soap_element_begin_in(soap, tag, 1, NULL))
-		return NULL;
-	if (!a)
-		if (!(a = (ns2__AuthenticationType **)soap_malloc(soap, sizeof(ns2__AuthenticationType *))))
-			return NULL;
-	*a = NULL;
-	if (!soap->null && *soap->href != '#')
-	{	soap_revert(soap);
-		if (!(*a = (ns2__AuthenticationType *)soap_instantiate_ns2__AuthenticationType(soap, -1, soap->type, soap->arrayType, NULL)))
-			return NULL;
-		(*a)->soap_default(soap);
-		if (!(*a)->soap_in(soap, tag, NULL))
-		{	*a = NULL;
-			return NULL;
-		}
-	}
-	else
-	{	a = (ns2__AuthenticationType **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_ns2__AuthenticationType, sizeof(ns2__AuthenticationType), 0, soap_fbase);
-		if (soap->body && soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	return a;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTons2__AuthenticationType(struct soap *soap, ns2__AuthenticationType *const*a, const char *tag, const char *type)
-{
-	if (soap_out_PointerTons2__AuthenticationType(soap, tag ? tag : "ns2:AuthenticationType", -2, a, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-SOAP_FMAC3 ns2__AuthenticationType ** SOAP_FMAC4 soap_get_PointerTons2__AuthenticationType(struct soap *soap, ns2__AuthenticationType **p, const char *tag, const char *type)
-{
-	if ((p = soap_in_PointerTons2__AuthenticationType(soap, tag, p, type)))
-		if (soap_getindependent(soap))
-			return NULL;
-	return p;
-}
-
-SOAP_FMAC3 void SOAP_FMAC4 soap_serialize_PointerTounsignedByte(struct soap *soap, unsigned char *const*a)
-{
-	(void)soap; (void)a; /* appease -Wall -Werror */
-#ifndef WITH_NOIDREF
-	(void)soap_reference(soap, *a, SOAP_TYPE_unsignedByte);
-#endif
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_out_PointerTounsignedByte(struct soap *soap, const char *tag, int id, unsigned char *const*a, const char *type)
-{
-	id = soap_element_id(soap, tag, id, *a, NULL, 0, type, SOAP_TYPE_unsignedByte, NULL);
-	if (id < 0)
-		return soap->error;
-	return soap_out_unsignedByte(soap, tag, id, *a, type);
-}
-
-SOAP_FMAC3 unsigned char ** SOAP_FMAC4 soap_in_PointerTounsignedByte(struct soap *soap, const char *tag, unsigned char **a, const char *type)
-{
-	(void)type; /* appease -Wall -Werror */
-	if (soap_element_begin_in(soap, tag, 1, NULL))
-		return NULL;
-	if (!a)
-		if (!(a = (unsigned char **)soap_malloc(soap, sizeof(unsigned char *))))
-			return NULL;
-	*a = NULL;
-	if (!soap->null && *soap->href != '#')
-	{	soap_revert(soap);
-		if (!(*a = soap_in_unsignedByte(soap, tag, *a, type)))
-			return NULL;
-	}
-	else
-	{	a = (unsigned char **)soap_id_lookup(soap, soap->href, (void**)a, SOAP_TYPE_unsignedByte, sizeof(unsigned char), 0, NULL);
-		if (soap->body && soap_element_end_in(soap, tag))
-			return NULL;
-	}
-	return a;
-}
-
-SOAP_FMAC3 int SOAP_FMAC4 soap_put_PointerTounsignedByte(struct soap *soap, unsigned char *const*a, const char *tag, const char *type)
-{
-	if (soap_out_PointerTounsignedByte(soap, tag ? tag : "unsignedByte", -2, a, type))
-		return soap->error;
-	return soap_putindependent(soap);
-}
-
-SOAP_FMAC3 unsigned char ** SOAP_FMAC4 soap_get_PointerTounsignedByte(struct soap *soap, unsigned char **p, const char *tag, const char *type)
-{
-	if ((p = soap_in_PointerTounsignedByte(soap, tag, p, type)))
+	if ((p = soap_in_PointerTons2__UserDataSession(soap, tag, p, type)))
 		if (soap_getindependent(soap))
 			return NULL;
 	return p;

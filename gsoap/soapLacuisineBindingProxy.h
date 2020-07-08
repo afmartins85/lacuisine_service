@@ -79,22 +79,22 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
         virtual char *soap_sprint_fault(char *buf, size_t len);
     #endif
         //
-        /// Web service synchronous operation 'AccessAuthentication' with default endpoint and default SOAP Action header, returns SOAP_OK or error code
-        virtual int AccessAuthentication(ns1__AccessAuthenticationRequestType *ns1__AccessAuthenticationRequest, ns1__AccessAuthenticationResponseType &ns1__AccessAuthenticationResponse) { return this->AccessAuthentication(NULL, NULL, ns1__AccessAuthenticationRequest, ns1__AccessAuthenticationResponse); }
-        /// Web service synchronous operation 'AccessAuthentication' to the specified endpoint and SOAP Action header, returns SOAP_OK or error code
-        virtual int AccessAuthentication(const char *soap_endpoint_url, const char *soap_action, ns1__AccessAuthenticationRequestType *ns1__AccessAuthenticationRequest, ns1__AccessAuthenticationResponseType &ns1__AccessAuthenticationResponse) { return this->send_AccessAuthentication(soap_endpoint_url, soap_action, ns1__AccessAuthenticationRequest) || this->recv_AccessAuthentication(ns1__AccessAuthenticationResponse) ? this->soap->error : SOAP_OK; }
-        /// Web service asynchronous operation 'send_AccessAuthentication' to send a request message to the specified endpoint and SOAP Action header, returns SOAP_OK or error code
-        virtual int send_AccessAuthentication(const char *soap_endpoint_url, const char *soap_action, ns1__AccessAuthenticationRequestType *ns1__AccessAuthenticationRequest);
-        /// Web service asynchronous operation 'recv_AccessAuthentication' to receive a response message from the connected endpoint, returns SOAP_OK or error code
-        virtual int recv_AccessAuthentication(ns1__AccessAuthenticationResponseType &ns1__AccessAuthenticationResponse);
-        //
         /// Web service synchronous operation 'OpenUserSession' with default endpoint and default SOAP Action header, returns SOAP_OK or error code
-        virtual int OpenUserSession(ns1__OpenUserSessionRequest *ns1__OpenUserSessionRequest_, ns1__OpenUserSessionResponse &ns1__OpenUserSessionResponse_) { return this->OpenUserSession(NULL, NULL, ns1__OpenUserSessionRequest_, ns1__OpenUserSessionResponse_); }
+        virtual int OpenUserSession(ns1__DataUserSessionType *ns1__DataUserSessionRequest, ns1__OpenUserSessionResponseType &ns1__OpenUserSessionResponse) { return this->OpenUserSession(NULL, NULL, ns1__DataUserSessionRequest, ns1__OpenUserSessionResponse); }
         /// Web service synchronous operation 'OpenUserSession' to the specified endpoint and SOAP Action header, returns SOAP_OK or error code
-        virtual int OpenUserSession(const char *soap_endpoint_url, const char *soap_action, ns1__OpenUserSessionRequest *ns1__OpenUserSessionRequest_, ns1__OpenUserSessionResponse &ns1__OpenUserSessionResponse_) { return this->send_OpenUserSession(soap_endpoint_url, soap_action, ns1__OpenUserSessionRequest_) || this->recv_OpenUserSession(ns1__OpenUserSessionResponse_) ? this->soap->error : SOAP_OK; }
+        virtual int OpenUserSession(const char *soap_endpoint_url, const char *soap_action, ns1__DataUserSessionType *ns1__DataUserSessionRequest, ns1__OpenUserSessionResponseType &ns1__OpenUserSessionResponse) { return this->send_OpenUserSession(soap_endpoint_url, soap_action, ns1__DataUserSessionRequest) || this->recv_OpenUserSession(ns1__OpenUserSessionResponse) ? this->soap->error : SOAP_OK; }
         /// Web service asynchronous operation 'send_OpenUserSession' to send a request message to the specified endpoint and SOAP Action header, returns SOAP_OK or error code
-        virtual int send_OpenUserSession(const char *soap_endpoint_url, const char *soap_action, ns1__OpenUserSessionRequest *ns1__OpenUserSessionRequest_);
+        virtual int send_OpenUserSession(const char *soap_endpoint_url, const char *soap_action, ns1__DataUserSessionType *ns1__DataUserSessionRequest);
         /// Web service asynchronous operation 'recv_OpenUserSession' to receive a response message from the connected endpoint, returns SOAP_OK or error code
-        virtual int recv_OpenUserSession(ns1__OpenUserSessionResponse &ns1__OpenUserSessionResponse_);
+        virtual int recv_OpenUserSession(ns1__OpenUserSessionResponseType &ns1__OpenUserSessionResponse);
+        //
+        /// Web service synchronous operation 'CloseUserSession' with default endpoint and default SOAP Action header, returns SOAP_OK or error code
+        virtual int CloseUserSession(ns1__DataUserSessionType *ns1__DataUserSessionRequest, ns1__CloseUserSessionResponseType &ns1__CloseUserSessionResponse) { return this->CloseUserSession(NULL, NULL, ns1__DataUserSessionRequest, ns1__CloseUserSessionResponse); }
+        /// Web service synchronous operation 'CloseUserSession' to the specified endpoint and SOAP Action header, returns SOAP_OK or error code
+        virtual int CloseUserSession(const char *soap_endpoint_url, const char *soap_action, ns1__DataUserSessionType *ns1__DataUserSessionRequest, ns1__CloseUserSessionResponseType &ns1__CloseUserSessionResponse) { return this->send_CloseUserSession(soap_endpoint_url, soap_action, ns1__DataUserSessionRequest) || this->recv_CloseUserSession(ns1__CloseUserSessionResponse) ? this->soap->error : SOAP_OK; }
+        /// Web service asynchronous operation 'send_CloseUserSession' to send a request message to the specified endpoint and SOAP Action header, returns SOAP_OK or error code
+        virtual int send_CloseUserSession(const char *soap_endpoint_url, const char *soap_action, ns1__DataUserSessionType *ns1__DataUserSessionRequest);
+        /// Web service asynchronous operation 'recv_CloseUserSession' to receive a response message from the connected endpoint, returns SOAP_OK or error code
+        virtual int recv_CloseUserSession(ns1__CloseUserSessionResponseType &ns1__CloseUserSessionResponse);
     };
 #endif

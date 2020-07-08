@@ -4,6 +4,7 @@ SOURCES += \
     $$PWD/soapC.cpp \
     $$PWD/soapLacuisineBindingService.cpp \
     $$PWD/soapLacuisineBindingProxy.cpp
+
 HEADERS += \
     $$PWD/stdsoap2.h \
     $$PWD/soapH.h \

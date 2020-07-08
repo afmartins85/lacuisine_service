@@ -167,64 +167,7 @@ char *LacuisineBindingProxy::soap_sprint_fault(char *buf, size_t len)
 }
 #endif
 
-int LacuisineBindingProxy::send_AccessAuthentication(const char *soap_endpoint_url, const char *soap_action, ns1__AccessAuthenticationRequestType *ns1__AccessAuthenticationRequest)
-{
-	struct __ns1__AccessAuthentication soap_tmp___ns1__AccessAuthentication;
-	if (soap_endpoint_url != NULL)
-		soap_endpoint = soap_endpoint_url;
-	if (soap_endpoint == NULL)
-		soap_endpoint = "http://localhost:9090/zzz";
-	if (soap_action == NULL)
-		soap_action = "tns:AccessAuthentication";
-	soap_tmp___ns1__AccessAuthentication.ns1__AccessAuthenticationRequest = ns1__AccessAuthenticationRequest;
-	soap_begin(soap);
-	soap->encodingStyle = NULL; /* use SOAP literal style */
-	soap_serializeheader(soap);
-	soap_serialize___ns1__AccessAuthentication(soap, &soap_tmp___ns1__AccessAuthentication);
-	if (soap_begin_count(soap))
-		return soap->error;
-	if ((soap->mode & SOAP_IO_LENGTH))
-	{	if (soap_envelope_begin_out(soap)
-		 || soap_putheader(soap)
-		 || soap_body_begin_out(soap)
-		 || soap_put___ns1__AccessAuthentication(soap, &soap_tmp___ns1__AccessAuthentication, "-ns1:AccessAuthentication", "")
-		 || soap_body_end_out(soap)
-		 || soap_envelope_end_out(soap))
-			 return soap->error;
-	}
-	if (soap_end_count(soap))
-		return soap->error;
-	if (soap_connect(soap, soap_endpoint, soap_action)
-	 || soap_envelope_begin_out(soap)
-	 || soap_putheader(soap)
-	 || soap_body_begin_out(soap)
-	 || soap_put___ns1__AccessAuthentication(soap, &soap_tmp___ns1__AccessAuthentication, "-ns1:AccessAuthentication", "")
-	 || soap_body_end_out(soap)
-	 || soap_envelope_end_out(soap)
-	 || soap_end_send(soap))
-		return soap_closesock(soap);
-	return SOAP_OK;
-}
-
-int LacuisineBindingProxy::recv_AccessAuthentication(ns1__AccessAuthenticationResponseType &ns1__AccessAuthenticationResponse)
-{
-	ns1__AccessAuthenticationResponse.soap_default(soap);
-	if (soap_begin_recv(soap)
-	 || soap_envelope_begin_in(soap)
-	 || soap_recv_header(soap)
-	 || soap_body_begin_in(soap))
-		return soap_closesock(soap);
-	ns1__AccessAuthenticationResponse.soap_get(soap, "ns1:AccessAuthenticationResponse", NULL);
-	if (soap->error)
-		return soap_recv_fault(soap, 0);
-	if (soap_body_end_in(soap)
-	 || soap_envelope_end_in(soap)
-	 || soap_end_recv(soap))
-		return soap_closesock(soap);
-	return soap_closesock(soap);
-}
-
-int LacuisineBindingProxy::send_OpenUserSession(const char *soap_endpoint_url, const char *soap_action, ns1__OpenUserSessionRequest *ns1__OpenUserSessionRequest_)
+int LacuisineBindingProxy::send_OpenUserSession(const char *soap_endpoint_url, const char *soap_action, ns1__DataUserSessionType *ns1__DataUserSessionRequest)
 {
 	struct __ns1__OpenUserSession soap_tmp___ns1__OpenUserSession;
 	if (soap_endpoint_url != NULL)
@@ -233,7 +176,7 @@ int LacuisineBindingProxy::send_OpenUserSession(const char *soap_endpoint_url, c
 		soap_endpoint = "http://localhost:9090/zzz";
 	if (soap_action == NULL)
 		soap_action = "tns:OpenUserSession";
-	soap_tmp___ns1__OpenUserSession.ns1__OpenUserSessionRequest_ = ns1__OpenUserSessionRequest_;
+	soap_tmp___ns1__OpenUserSession.ns1__DataUserSessionRequest = ns1__DataUserSessionRequest;
 	soap_begin(soap);
 	soap->encodingStyle = NULL; /* use SOAP literal style */
 	soap_serializeheader(soap);
@@ -263,15 +206,72 @@ int LacuisineBindingProxy::send_OpenUserSession(const char *soap_endpoint_url, c
 	return SOAP_OK;
 }
 
-int LacuisineBindingProxy::recv_OpenUserSession(ns1__OpenUserSessionResponse &ns1__OpenUserSessionResponse_)
+int LacuisineBindingProxy::recv_OpenUserSession(ns1__OpenUserSessionResponseType &ns1__OpenUserSessionResponse)
 {
-	ns1__OpenUserSessionResponse_.soap_default(soap);
+	ns1__OpenUserSessionResponse.soap_default(soap);
 	if (soap_begin_recv(soap)
 	 || soap_envelope_begin_in(soap)
 	 || soap_recv_header(soap)
 	 || soap_body_begin_in(soap))
 		return soap_closesock(soap);
-	ns1__OpenUserSessionResponse_.soap_get(soap, "ns1:OpenUserSessionResponse", NULL);
+	ns1__OpenUserSessionResponse.soap_get(soap, "ns1:OpenUserSessionResponse", NULL);
+	if (soap->error)
+		return soap_recv_fault(soap, 0);
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap_closesock(soap);
+	return soap_closesock(soap);
+}
+
+int LacuisineBindingProxy::send_CloseUserSession(const char *soap_endpoint_url, const char *soap_action, ns1__DataUserSessionType *ns1__DataUserSessionRequest)
+{
+	struct __ns1__CloseUserSession soap_tmp___ns1__CloseUserSession;
+	if (soap_endpoint_url != NULL)
+		soap_endpoint = soap_endpoint_url;
+	if (soap_endpoint == NULL)
+		soap_endpoint = "http://localhost:9090/zzz";
+	if (soap_action == NULL)
+		soap_action = "tns:CloseUserSession";
+	soap_tmp___ns1__CloseUserSession.ns1__DataUserSessionRequest = ns1__DataUserSessionRequest;
+	soap_begin(soap);
+	soap->encodingStyle = NULL; /* use SOAP literal style */
+	soap_serializeheader(soap);
+	soap_serialize___ns1__CloseUserSession(soap, &soap_tmp___ns1__CloseUserSession);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if ((soap->mode & SOAP_IO_LENGTH))
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || soap_put___ns1__CloseUserSession(soap, &soap_tmp___ns1__CloseUserSession, "-ns1:CloseUserSession", "")
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	}
+	if (soap_end_count(soap))
+		return soap->error;
+	if (soap_connect(soap, soap_endpoint, soap_action)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || soap_put___ns1__CloseUserSession(soap, &soap_tmp___ns1__CloseUserSession, "-ns1:CloseUserSession", "")
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap_closesock(soap);
+	return SOAP_OK;
+}
+
+int LacuisineBindingProxy::recv_CloseUserSession(ns1__CloseUserSessionResponseType &ns1__CloseUserSessionResponse)
+{
+	ns1__CloseUserSessionResponse.soap_default(soap);
+	if (soap_begin_recv(soap)
+	 || soap_envelope_begin_in(soap)
+	 || soap_recv_header(soap)
+	 || soap_body_begin_in(soap))
+		return soap_closesock(soap);
+	ns1__CloseUserSessionResponse.soap_get(soap, "ns1:CloseUserSessionResponse", NULL);
 	if (soap->error)
 		return soap_recv_fault(soap, 0);
 	if (soap_body_end_in(soap)

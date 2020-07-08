@@ -229,8 +229,8 @@ int LacuisineBindingService::serve()
 	return SOAP_OK;
 }
 
-static int serve___ns1__AccessAuthentication(struct soap*, LacuisineBindingService*);
 static int serve___ns1__OpenUserSession(struct soap*, LacuisineBindingService*);
+static int serve___ns1__CloseUserSession(struct soap*, LacuisineBindingService*);
 
 int LacuisineBindingService::dispatch()
 {	return dispatch(this->soap);
@@ -240,58 +240,17 @@ int LacuisineBindingService::dispatch(struct soap* soap)
 {
 	LacuisineBindingService_init(soap->imode, soap->omode);
 	(void)soap_peek_element(soap);
-	if (!soap_match_tag(soap, soap->tag, "ns1:AccessAuthenticationRequest"))
-		return serve___ns1__AccessAuthentication(soap, this);
-	if (!soap_match_tag(soap, soap->tag, "ns1:OpenUserSessionRequest"))
+	if (!soap_match_tag(soap, soap->tag, "ns1:DataUserSessionRequest"))
 		return serve___ns1__OpenUserSession(soap, this);
+	if (!soap_match_tag(soap, soap->tag, "ns1:DataUserSessionRequest"))
+		return serve___ns1__CloseUserSession(soap, this);
 	return soap->error = SOAP_NO_METHOD;
-}
-
-static int serve___ns1__AccessAuthentication(struct soap *soap, LacuisineBindingService *service)
-{	struct __ns1__AccessAuthentication soap_tmp___ns1__AccessAuthentication;
-	ns1__AccessAuthenticationResponseType ns1__AccessAuthenticationResponse;
-	ns1__AccessAuthenticationResponse.soap_default(soap);
-	soap_default___ns1__AccessAuthentication(soap, &soap_tmp___ns1__AccessAuthentication);
-	if (!soap_get___ns1__AccessAuthentication(soap, &soap_tmp___ns1__AccessAuthentication, "-ns1:AccessAuthentication", NULL))
-		return soap->error;
-	if (soap_body_end_in(soap)
-	 || soap_envelope_end_in(soap)
-	 || soap_end_recv(soap))
-		return soap->error;
-	soap->error = service->AccessAuthentication(soap_tmp___ns1__AccessAuthentication.ns1__AccessAuthenticationRequest, ns1__AccessAuthenticationResponse);
-	if (soap->error)
-		return soap->error;
-	soap->encodingStyle = NULL; /* use SOAP literal style */
-	soap_serializeheader(soap);
-	ns1__AccessAuthenticationResponse.soap_serialize(soap);
-	if (soap_begin_count(soap))
-		return soap->error;
-	if ((soap->mode & SOAP_IO_LENGTH))
-	{	if (soap_envelope_begin_out(soap)
-		 || soap_putheader(soap)
-		 || soap_body_begin_out(soap)
-		 || ns1__AccessAuthenticationResponse.soap_put(soap, "ns1:AccessAuthenticationResponse", "")
-		 || soap_body_end_out(soap)
-		 || soap_envelope_end_out(soap))
-			 return soap->error;
-	};
-	if (soap_end_count(soap)
-	 || soap_response(soap, SOAP_OK)
-	 || soap_envelope_begin_out(soap)
-	 || soap_putheader(soap)
-	 || soap_body_begin_out(soap)
-	 || ns1__AccessAuthenticationResponse.soap_put(soap, "ns1:AccessAuthenticationResponse", "")
-	 || soap_body_end_out(soap)
-	 || soap_envelope_end_out(soap)
-	 || soap_end_send(soap))
-		return soap->error;
-	return soap_closesock(soap);
 }
 
 static int serve___ns1__OpenUserSession(struct soap *soap, LacuisineBindingService *service)
 {	struct __ns1__OpenUserSession soap_tmp___ns1__OpenUserSession;
-	ns1__OpenUserSessionResponse ns1__OpenUserSessionResponse_;
-	ns1__OpenUserSessionResponse_.soap_default(soap);
+	ns1__OpenUserSessionResponseType ns1__OpenUserSessionResponse;
+	ns1__OpenUserSessionResponse.soap_default(soap);
 	soap_default___ns1__OpenUserSession(soap, &soap_tmp___ns1__OpenUserSession);
 	if (!soap_get___ns1__OpenUserSession(soap, &soap_tmp___ns1__OpenUserSession, "-ns1:OpenUserSession", NULL))
 		return soap->error;
@@ -299,19 +258,19 @@ static int serve___ns1__OpenUserSession(struct soap *soap, LacuisineBindingServi
 	 || soap_envelope_end_in(soap)
 	 || soap_end_recv(soap))
 		return soap->error;
-	soap->error = service->OpenUserSession(soap_tmp___ns1__OpenUserSession.ns1__OpenUserSessionRequest_, ns1__OpenUserSessionResponse_);
+	soap->error = service->OpenUserSession(soap_tmp___ns1__OpenUserSession.ns1__DataUserSessionRequest, ns1__OpenUserSessionResponse);
 	if (soap->error)
 		return soap->error;
 	soap->encodingStyle = NULL; /* use SOAP literal style */
 	soap_serializeheader(soap);
-	ns1__OpenUserSessionResponse_.soap_serialize(soap);
+	ns1__OpenUserSessionResponse.soap_serialize(soap);
 	if (soap_begin_count(soap))
 		return soap->error;
 	if ((soap->mode & SOAP_IO_LENGTH))
 	{	if (soap_envelope_begin_out(soap)
 		 || soap_putheader(soap)
 		 || soap_body_begin_out(soap)
-		 || ns1__OpenUserSessionResponse_.soap_put(soap, "ns1:OpenUserSessionResponse", "")
+		 || ns1__OpenUserSessionResponse.soap_put(soap, "ns1:OpenUserSessionResponse", "")
 		 || soap_body_end_out(soap)
 		 || soap_envelope_end_out(soap))
 			 return soap->error;
@@ -321,7 +280,48 @@ static int serve___ns1__OpenUserSession(struct soap *soap, LacuisineBindingServi
 	 || soap_envelope_begin_out(soap)
 	 || soap_putheader(soap)
 	 || soap_body_begin_out(soap)
-	 || ns1__OpenUserSessionResponse_.soap_put(soap, "ns1:OpenUserSessionResponse", "")
+	 || ns1__OpenUserSessionResponse.soap_put(soap, "ns1:OpenUserSessionResponse", "")
+	 || soap_body_end_out(soap)
+	 || soap_envelope_end_out(soap)
+	 || soap_end_send(soap))
+		return soap->error;
+	return soap_closesock(soap);
+}
+
+static int serve___ns1__CloseUserSession(struct soap *soap, LacuisineBindingService *service)
+{	struct __ns1__CloseUserSession soap_tmp___ns1__CloseUserSession;
+	ns1__CloseUserSessionResponseType ns1__CloseUserSessionResponse;
+	ns1__CloseUserSessionResponse.soap_default(soap);
+	soap_default___ns1__CloseUserSession(soap, &soap_tmp___ns1__CloseUserSession);
+	if (!soap_get___ns1__CloseUserSession(soap, &soap_tmp___ns1__CloseUserSession, "-ns1:CloseUserSession", NULL))
+		return soap->error;
+	if (soap_body_end_in(soap)
+	 || soap_envelope_end_in(soap)
+	 || soap_end_recv(soap))
+		return soap->error;
+	soap->error = service->CloseUserSession(soap_tmp___ns1__CloseUserSession.ns1__DataUserSessionRequest, ns1__CloseUserSessionResponse);
+	if (soap->error)
+		return soap->error;
+	soap->encodingStyle = NULL; /* use SOAP literal style */
+	soap_serializeheader(soap);
+	ns1__CloseUserSessionResponse.soap_serialize(soap);
+	if (soap_begin_count(soap))
+		return soap->error;
+	if ((soap->mode & SOAP_IO_LENGTH))
+	{	if (soap_envelope_begin_out(soap)
+		 || soap_putheader(soap)
+		 || soap_body_begin_out(soap)
+		 || ns1__CloseUserSessionResponse.soap_put(soap, "ns1:CloseUserSessionResponse", "")
+		 || soap_body_end_out(soap)
+		 || soap_envelope_end_out(soap))
+			 return soap->error;
+	};
+	if (soap_end_count(soap)
+	 || soap_response(soap, SOAP_OK)
+	 || soap_envelope_begin_out(soap)
+	 || soap_putheader(soap)
+	 || soap_body_begin_out(soap)
+	 || ns1__CloseUserSessionResponse.soap_put(soap, "ns1:CloseUserSessionResponse", "")
 	 || soap_body_end_out(soap)
 	 || soap_envelope_end_out(soap)
 	 || soap_end_send(soap))
