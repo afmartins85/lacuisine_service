@@ -34,15 +34,15 @@ ns2__ProfileEnum getProfileId(const QString &str) {
 
 /**
  * @brief LacuisineBindingService::OpenUserSession
- * @param ns1__DataUserSessionRequest
+ * @param ns1__OpenUserSessionRequest
  * @param ns1__OpenUserSessionResponse
  * @return
  */
-int LacuisineBindingService::OpenUserSession(ns1__DataUserSessionType *ns1__DataUserSessionRequest,
+int LacuisineBindingService::OpenUserSession(ns1__OpenUserSessionRequestType *ns1__OpenUserSessionRequest,
                                              ns1__OpenUserSessionResponseType &ns1__OpenUserSessionResponse) {
-  QString userName(ns1__DataUserSessionRequest->userName.c_str());
-  QString deviceId(ns1__DataUserSessionRequest->deviceId.c_str());
-  QString passwd(ns1__DataUserSessionRequest->passwd.c_str());
+  QString userName(ns1__OpenUserSessionRequest->userName.c_str());
+  QString deviceId(ns1__OpenUserSessionRequest->deviceId.c_str());
+  QString passwd(ns1__OpenUserSessionRequest->passwd.c_str());
   LOG_SCOPE_F(INFO, "OpenUserSessionRequest:");
   LOG_F(INFO, "UserName: %s", userName.toLatin1().data());
   //  LOG_F(INFO, "password: %s", passwd.toLatin1().data());
@@ -81,12 +81,13 @@ int LacuisineBindingService::OpenUserSession(ns1__DataUserSessionType *ns1__Data
  * @param ns1__CloseUserSessionResponse
  * @return
  */
-int LacuisineBindingService::CloseUserSession(ns1__DataUserSessionType *ns1__DataUserSessionRequest,
+int LacuisineBindingService::CloseUserSession(ns1__CloseUserSessionRequestType *ns1__CloseUserSessionRequest,
                                               ns1__CloseUserSessionResponseType &ns1__CloseUserSessionResponse) {
-  QString userName(ns1__DataUserSessionRequest->userName.c_str());
-  QString deviceId(ns1__DataUserSessionRequest->deviceId.c_str());
-  QString passwd(ns1__DataUserSessionRequest->passwd.c_str());
+  QString userName(ns1__CloseUserSessionRequest->userName.c_str());
+  QString deviceId(ns1__CloseUserSessionRequest->deviceId.c_str());
+  QString passwd(ns1__CloseUserSessionRequest->passwd.c_str());
 
+  LOG_SCOPE_F(INFO, "CloseUserSessionRequest:");
   ns1__CloseUserSessionResponse.success = true;
 
   Operation *database_handle_ptr = static_cast<Operation *>(this->soap->user);
@@ -99,12 +100,11 @@ int LacuisineBindingService::CloseUserSession(ns1__DataUserSessionType *ns1__Dat
     return SOAP_OK;
   }
 
-  int k = it.value();
-  QString passDecoded = Authentication::decodeCipher(passwd, k);
-  QString devIDDecoded = Authentication::decodeCipher(deviceId, k);
-
-  LOG_F(INFO, "passDecoded %s", passDecoded.toLatin1().data());
-  LOG_F(INFO, "devIDDecoded %s", devIDDecoded.toLatin1().data());
+  if (database_handle_ptr->identifyUser(userName, passwd) == true) {
+    // Remove user from registers
+    database_handle_ptr->getUserSessionList().erase(it);
+    LOG_F(INFO, "Session closed to %s", userName.toLatin1().data());
+  }
 
   ns1__CloseUserSessionResponse.response = ns2__SessionEnum::ns2__SessionEnum__SessionIsSuccessfullyClosed;
   return SOAP_OK;
